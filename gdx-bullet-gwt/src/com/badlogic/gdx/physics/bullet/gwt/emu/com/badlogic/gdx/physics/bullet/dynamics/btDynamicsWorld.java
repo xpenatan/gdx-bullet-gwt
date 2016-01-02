@@ -5,11 +5,10 @@ import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionWorld;
 import com.badlogic.gdx.physics.bullet.linearmath.btMotionState;
-import com.badlogic.gdx.physics.bullet.linearmath.btVector3;
 
 public class btDynamicsWorld extends btCollisionWorld
 {
-	btVector3 gravity = new btVector3();
+	Vector3 gravity = new Vector3();
 
 	public btDynamicsWorld()
 	{
@@ -28,56 +27,43 @@ public class btDynamicsWorld extends btCollisionWorld
 		return 0;
 	}-*/;
 
-	public void setGravity(Vector3 gravity)
-	{
-		this.gravity.setX(gravity.x);
-		this.gravity.setY(gravity.y);
-		this.gravity.setZ(gravity.z);
-		setGravity();
-
-		//		Gdx.app.log("Gravityyy", "" + getGravity());
-	}
-
-	private native float getGravity() /*-{
+	public native Vector3 getGravity() /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		var gravity = worldJS.getGravity();
-
-		return gravity.y();
-	}-*/;
-
-	private native void setGravity() /*-{
-		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var jsGravity = worldJS.getGravity();
 		var gravity = this.@com.badlogic.gdx.physics.bullet.dynamics.btDynamicsWorld::gravity;
-		var gravityJS = gravity.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		worldJS.setGravity(gravityJS);
+		gravity.@com.badlogic.gdx.math.Vector3::x = jsGravity.x();
+		gravity.@com.badlogic.gdx.math.Vector3::y = jsGravity.y();
+		gravity.@com.badlogic.gdx.math.Vector3::z = jsGravity.z();
+		return gravity;
+	}-*/;
+	
+	public native void setGravity(Vector3 gravity) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var x = gravity.@com.badlogic.gdx.math.Vector3::x;
+		var y = gravity.@com.badlogic.gdx.math.Vector3::y;
+		var z = gravity.@com.badlogic.gdx.math.Vector3::z;
+		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector.setValue(x,y,z);
+		worldJS.setGravity(tmpbtVector);
 	}-*/;
 
-	public void addRigidBody(btRigidBody body)
-	{
-		addObject(body);
-		addRigidBodyy(body);
-	}
 
-	private native void addRigidBodyy(btRigidBody body) /*-{
+	public native void addRigidBody(btRigidBody body) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
 		worldJS.addRigidBody(bodyJS);
 	}-*/;
 
-	public void removeRigidBody(btRigidBody body)
-	{
-		removeObject(body);
-		removeRigidBodyy(body);
-	}
-
-	private native void removeRigidBodyy(btRigidBody body) /*-{
+	public native void removeRigidBody(btRigidBody body) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::removeObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
 		worldJS.removeRigidBody(bodyJS);
 	}-*/;
 	
 	void loopMotionState()
-	{ //FIXME  dirty hack to loop all motionState because ammo.js motionState dont work.
+	{ //FIXME  dirty hack to loop all motionState because ammo.js motionState dont work. Called by btDiscreteDynamicWorld.
 		int size = objectArray.m_collisionObjects.size;
 		
 		for(int i = 0; i < size;i++)
@@ -104,6 +90,5 @@ public class btDynamicsWorld extends btCollisionWorld
 			}
 			
 		}
-		
 	}
 }

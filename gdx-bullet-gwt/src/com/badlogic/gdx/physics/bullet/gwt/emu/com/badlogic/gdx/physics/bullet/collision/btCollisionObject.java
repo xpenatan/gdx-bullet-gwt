@@ -1,6 +1,8 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.math.Matrix4;
+import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.btTransform;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -8,60 +10,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class btCollisionObject extends BulletBase
 {
 	btTransform btTransform = new btTransform(false);
-	Matrix4 transform = new Matrix4();
 	protected btCollisionShape collisionShape;
-	
-	public Matrix4 getWorldTransform()
-	{
-		try
-		{
-			
-			if(this.jsObject == null)
-			{
-				System.out.println("a");
-			}
-			btTransform.jsObject = getWorldTransformm();
-			
-			if(btTransform.jsObject == null)
-			{
-				System.out.println("a");
-			}
-			
-			btTransform.getSSTransform(transform);
-		}
-		catch (Throwable t)
-		{
-			System.out.println("a");
-		}
-	
-		return transform;
-	}
-
-	public void getWorldTransform(Matrix4 out)
-	{
-//		getWorldTransform(btTransform.javaScriptObject);
-//		btTransform.getTransform(out);
-	}
-
-	private native JavaScriptObject getWorldTransformm() /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		return collObject.getWorldTransform();
-	}-*/;
-
-	private native void getWorldTransform(JavaScriptObject btTransformm) /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		collObject.getWorldTransform(btTransformm); //FIXME not working. only return zeros.
-	}-*/;
-
-	public native int getCollisionFlags() /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		return collObject.getCollisionFlags();
-	}-*/;
-
-	public btCollisionShape getCollisionShape()
-	{
-		return collisionShape;
-	}
 
 	protected void refCollisionShape(btCollisionShape shape)
 	{
@@ -74,6 +23,107 @@ public class btCollisionObject extends BulletBase
 	}
 	
 	JavaScriptObject setWorldTran;
+	
+	public native void setAnisotropicFriction(Vector3 anisotropicFriction, int frictionMode) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var x = anisotropicFriction.@com.badlogic.gdx.math.Vector3::x;
+		var y = anisotropicFriction.@com.badlogic.gdx.math.Vector3::y;
+		var z = anisotropicFriction.@com.badlogic.gdx.math.Vector3::z;
+		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector.setValue(x,y,z);
+		collObject.setAnisotropicFriction(anisotropicFriction, frictionMode);
+	}-*/;
+	
+	public native void setAnisotropicFriction(Vector3 anisotropicFriction) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var x = anisotropicFriction.@com.badlogic.gdx.math.Vector3::x;
+		var y = anisotropicFriction.@com.badlogic.gdx.math.Vector3::y;
+		var z = anisotropicFriction.@com.badlogic.gdx.math.Vector3::z;
+		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector.setValue(x,y,z);
+		collObject.setAnisotropicFriction(anisotropicFriction);
+	}-*/;
+	
+	public btCollisionShape getCollisionShape()
+	{
+		return collisionShape;
+	}
+	
+	public native void setContactProcessingThreshold(int newState) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setContactProcessingThreshold(newState);
+	}-*/;
+	
+	public native void setActivationState(int newState) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setActivationState(newState);
+	}-*/;
+	
+	public native void forceActivationState(int newState) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.forceActivationState(newState);
+	}-*/;
+	
+	public native void activate(boolean forceActivation) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.activate(forceActivation);
+	}-*/;
+
+	public native void activate() /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.activate();
+	}-*/;
+
+	public native boolean isActive() /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.isActive();
+	}-*/;
+	
+	public native boolean isKinematicObject()/*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.isKinematicObject();
+	}-*/;
+	
+	public native void setRestitution(float rest)/*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setRestitution(rest);
+	}-*/;
+	
+	public native void setFriction(float frict)/*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setFriction(frict);
+	}-*/;
+	
+	public native void setRollingFriction(float frict)/*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setRollingFriction(frict);
+	}-*/;
+	
+	private native JavaScriptObject getWorldTransformm() /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.getWorldTransform();
+	}-*/;
+
+	public Matrix4 getWorldTransform()
+	{
+		com.badlogic.gdx.physics.bullet.linearmath.btTransform.getTransform(getWorldTransformm(), Bullet.TMP_Matrix4_1);
+		return Bullet.TMP_Matrix4_1;
+	}
+	
+	public void getWorldTransform(Matrix4 out)
+	{
+		com.badlogic.gdx.physics.bullet.linearmath.btTransform.getTransform(getWorldTransformm(), out);
+	}
+	
+	public native int getCollisionFlags() /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.getCollisionFlags();
+	}-*/;
+
+	public native void setCollisionFlags(int flag) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setCollisionFlags(flag);
+	}-*/;
 	
 	public void setWorldTransform(Matrix4 transform)
 	{
@@ -91,31 +141,42 @@ public class btCollisionObject extends BulletBase
 		collObject.setWorldTransform(transformJS);
 	}-*/;
 
-	public native void setCollisionFlags(int flag) /*-{
+	public native void setCollisionShape(btCollisionShape collisionShape) /*-{
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::refCollisionShape(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionShape;)(collisionShape)
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		collObject.setCollisionFlags(flag);
+		var collShapeJS = collisionShape.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setCollisionShape (collShapeJS);
+	}-*/;
+	
+	public native void setCcdMotionThreshold(float ccdMotionThreshold) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setCcdMotionThreshold(ccdMotionThreshold);
+	}-*/;
+	
+	public native void setCcdSweptSphereRadius (float radius) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setCcdSweptSphereRadius(radius);
+	}-*/;
+	
+	public native boolean getUserIndex () /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.getUserIndex();
+	}-*/;
+	
+	public native void setUserIndex (int index) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setUserIndex(index);
+	}-*/;
+	
+	public native int getUserPointer () /*-{
+		return 0; //TODO what goes here? 
 	}-*/;
 
-	public native void activate(boolean forceActivation) /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		collObject.activate(forceActivation);
+	public native void setUserPointer (int userPointer) /*-{
+		 //TODO what goes here? 
 	}-*/;
 
-	public native void activate() /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		collObject.activate();
-	}-*/;
-
-	public native void forceActivationState(int newState) /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		collObject.forceActivationState(newState);
-	}-*/;
-
-	public native boolean isActive() /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		collObject.isActive();
-	}-*/;
-
+	
 	public final static class CollisionFlags
 	{
 		public final static int CF_STATIC_OBJECT = 1;

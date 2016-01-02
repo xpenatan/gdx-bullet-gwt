@@ -5,7 +5,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class BulletBase implements Disposable
 {
-	public JavaScriptObject jsObject;
+	public JavaScriptObject jsObject; // public to be able to easily access in js code.
 	boolean disposed;
 
 	@Override

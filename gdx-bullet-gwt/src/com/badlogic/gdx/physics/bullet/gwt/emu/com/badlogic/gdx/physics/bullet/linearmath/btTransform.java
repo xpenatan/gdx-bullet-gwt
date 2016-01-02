@@ -66,26 +66,31 @@ public class btTransform extends BulletBase
 	
 
 	/**
-	 * this sync matrix transform with javascript transform
+	 * this sync matrix transform with javascript transform. btTransformJS is the btTransform from ammo get call.
 	 */
-	public void getSSTransform(Matrix4 out)
-	{//FIXME need check if there is a better way to sync
+	public static native void getTransform(JavaScriptObject btTransformJS, Matrix4 out) /*-{
+	//FIXME need check if there is a better way to sync
+		
+		var rotation = btTransformJS.getRotation();
+		var origin = btTransformJS.getOrigin();
+
+		var vector3 = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Vector3_1;
+		vector3.@com.badlogic.gdx.math.Vector3::x = origin.x();
+		vector3.@com.badlogic.gdx.math.Vector3::y = origin.y();
+		vector3.@com.badlogic.gdx.math.Vector3::z = origin.z();
+		
+		var quaternion = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Quaternion_1;
+		quaternion.@com.badlogic.gdx.math.Quaternion::x = rotation.x();
+		quaternion.@com.badlogic.gdx.math.Quaternion::y = rotation.y();
+		quaternion.@com.badlogic.gdx.math.Quaternion::z = rotation.z();
+		quaternion.@com.badlogic.gdx.math.Quaternion::w = rotation.w();
+		
+		out.@com.badlogic.gdx.math.Matrix4::idt()();
+		out.@com.badlogic.gdx.math.Matrix4::translate(Lcom/badlogic/gdx/math/Vector3;)(vector3);
+		out.@com.badlogic.gdx.math.Matrix4::rotate(Lcom/badlogic/gdx/math/Quaternion;)(quaternion);
 		
 		
-		getJSValue(pos);
-		
-		quat.x = rx;
-		quat.y = ry;
-		quat.z = rz;
-		quat.w = rw;
-		
-		out.idt();
-		out.translate(pos);
-		out.rotate(quat);
-		
-		
-		
-		//***  NOT WORKING  Basis should be faster than using quat/rotate calculation but its not working.
+//***  NOT WORKING  Basis should be faster than using quat/rotate calculation but its not working.
 //		tmp3x3.idt();
 //		getJSValue(pos);
 //		
@@ -93,9 +98,9 @@ public class btTransform extends BulletBase
 //		btTmp3x3.getMatrixJS(basis, tmp3x3);
 //		
 //		out.idt();
-//		out.set(tmp3x3.transpose()).setTranslation(pos);
-		//**************************
-	}
+//		out.set(tmp3x3).setTranslation(pos);
+//**************************
+	}-*/;
 	
 //	transform.set(btT.getBasis()).setTranslation(btT.getOrigin());
 	
@@ -116,23 +121,6 @@ public class btTransform extends BulletBase
 	
 		quatJS.setValue(xx, yy, zz, ww);
 		transformJS.setRotation(quatJS);
-	}-*/;
-	
-	
-	private native void getJSValue(Vector3 position) /*-{
-		var transformJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		var rotation = transformJS.getRotation();
-		var origin = transformJS.getOrigin();
-
-		position.@com.badlogic.gdx.math.Vector3::x = origin.x();
-		position.@com.badlogic.gdx.math.Vector3::y = origin.y();
-		position.@com.badlogic.gdx.math.Vector3::z = origin.z();
-		
-		this.@com.badlogic.gdx.physics.bullet.linearmath.btTransform::rx = rotation.x();
-		this.@com.badlogic.gdx.physics.bullet.linearmath.btTransform::ry = rotation.y();
-		this.@com.badlogic.gdx.physics.bullet.linearmath.btTransform::rz = rotation.z();
-		this.@com.badlogic.gdx.physics.bullet.linearmath.btTransform::rw = rotation.w();
-		
 	}-*/;
 	
 	private native JavaScriptObject getBasis() /*-{

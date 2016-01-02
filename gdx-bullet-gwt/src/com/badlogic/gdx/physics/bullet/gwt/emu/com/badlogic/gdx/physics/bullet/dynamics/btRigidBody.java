@@ -22,6 +22,17 @@ public class btRigidBody extends btCollisionObject
 		refMotionState(constructionInfo.motionState);
 		jsObject = createObj(constructionInfo);
 	}
+	
+	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia)
+	{
+		this(new btRigidBodyConstructionInfo(mass, motionState, collisionShape, localInertia));
+	}
+
+	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape) 
+	{
+		this(new btRigidBodyConstructionInfo(mass, motionState, collisionShape));
+	}
+	
 
 	private native JavaScriptObject createObj(btRigidBodyConstructionInfo constructionInfo) /*-{
 		var rbInfo = constructionInfo.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
@@ -35,7 +46,7 @@ public class btRigidBody extends btCollisionObject
 	}
 	
 	
-//	public native void setMotionState(btMotionState motionState) /*-{ 
+//	public native void setMotionState(btMotionState motionState) /*-{  FIXME Dont work. maybe with a fixed ammo.js this will proper implemented. 
 //		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::javaScriptObject;
 //		
 ////		var motinState = new $wnd.Ammo.btDefaultMotionState(new $wnd.Ammo.btTransform());
@@ -62,20 +73,14 @@ public class btRigidBody extends btCollisionObject
 //		
 //	}-*/;
 	
-	public void applyCentralImpulse(Vector3 impulse)
-	{
-		applyCentralImpulse(tmp.jsObject, impulse);
-	}
-	
-	private native void applyCentralImpulse(JavaScriptObject btVector, Vector3 impulse) /*-{ 
+	public native void applyCentralImpulse(Vector3 impulse) /*-{ 
 		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var x = impulse.@com.badlogic.gdx.math.Vector3::x;
 		var y = impulse.@com.badlogic.gdx.math.Vector3::y;
 		var z = impulse.@com.badlogic.gdx.math.Vector3::z;
-		btVector.setX(x);
-		btVector.setY(y);
-		btVector.setZ(z);
-		rBody.applyCentralImpulse(btVector);
+		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector.setValue(x,y,z);
+		rBody.applyCentralImpulse(tmpbtVector);
 	}-*/;
 	
 	
@@ -90,44 +95,32 @@ public class btRigidBody extends btCollisionObject
 		rBody.setMassProps(mass, inertiaa);
 	}-*/;
 	
-	public void applyCentralForce(Vector3 force)
-	{
-		tmp.set(force.x, force.y, force.z);
-		applyCentralForce(tmp);
-	}
 	
-	private native void applyCentralForce(btVector3 value) /*-{
+	public native void applyCentralForce(Vector3 force) /*-{
 		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		var force = value.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		rBody.applyCentralForce(force);
+		var x = force.@com.badlogic.gdx.math.Vector3::x;
+		var y = force.@com.badlogic.gdx.math.Vector3::y;
+		var z = force.@com.badlogic.gdx.math.Vector3::z;
+		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector.setValue(x,y,z);
+		rBody.applyCentralForce(tmpbtVector);
 	}-*/;
 
-	public void applyGravity()
-	{
-		//FIXME 
-//		if (isStaticOrKinematicObject())
+	public native void applyGravity()/*-{
+//		if (isStaticOrKinematicObject()) //FIXME  needs implementation
 //			return;
 		
-		applyCentralForce(m_gravity);
-	}
+		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector.setValue(0,0,0);
+		rBody.applyCentralForce(tmpbtVector);
+	}-*/;
 
 	public void setGravity(Vector3 gravity) 
 	{ //FIXME ammo.js dont have this method
 	
 	}
 	
-	//	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia) {
-	//		this(false, mass, motionState, collisionShape, localInertia);
-	//		refCollisionShape(collisionShape);
-	//		refMotionState(motionState);
-	//	}
-	//	
-	//	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape) {
-	//		this(false, mass, motionState, collisionShape);
-	//		refCollisionShape(collisionShape);
-	//		refMotionState(motionState);
-	//	}
-
 	protected void refMotionState(btMotionState motionState)
 	{
 		if (this.motionState == motionState)
@@ -154,7 +147,7 @@ public class btRigidBody extends btCollisionObject
 		{
 			this.motionState = motionState;
 			this.collisionShape = collisionShape;
-			jsObject = createObj(mass, motionState == null ? null : motionState.jsObject, collisionShape.jsObject, new btVector3(localInertia).jsObject);
+			jsObject = createObj(mass, motionState == null ? null : motionState.jsObject, collisionShape.jsObject, localInertia == null ? null : new btVector3(localInertia).jsObject);
 		}
 
 		public btRigidBodyConstructionInfo(float mass, btMotionState motionState, btCollisionShape collisionShape)
@@ -163,17 +156,11 @@ public class btRigidBody extends btCollisionObject
 		}
 
 		private native JavaScriptObject createObj(float mass, JavaScriptObject motionState, JavaScriptObject collisionShape, JavaScriptObject localInertia) /*-{
-
-			//			var startTransform = new  $wnd.Ammo.btTransform();
-			//			var myMotionState = new  $wnd.Ammo.btDefaultMotionState(startTransform);
-
-			var obj = new $wnd.Ammo.btRigidBodyConstructionInfo(mass, motionState, collisionShape, localInertia);
-			return obj;
+			return new $wnd.Ammo.btRigidBodyConstructionInfo(mass, motionState, collisionShape, localInertia);
 		}-*/;
 
 		private native JavaScriptObject createObj(float mass, JavaScriptObject motionState, JavaScriptObject collisionShape) /*-{
-			var obj = new $wnd.Ammo.btRigidBodyConstructionInfo(mass, motionState, collisionShape);
-			return obj;
+			return new $wnd.Ammo.btRigidBodyConstructionInfo(mass, motionState, collisionShape);
 		}-*/;
 	}
 }

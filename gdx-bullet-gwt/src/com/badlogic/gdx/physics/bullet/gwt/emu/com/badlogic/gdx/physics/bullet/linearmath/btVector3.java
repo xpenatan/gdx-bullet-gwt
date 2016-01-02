@@ -22,7 +22,7 @@ public class btVector3 extends BulletBase
 		jsObject = createObj(vector3.x, vector3.y, vector3.z);
 	}
 
-	private native JavaScriptObject createObj(float x, float y, float z) /*-{
+	public static native JavaScriptObject createObj(float x, float y, float z) /*-{
 		var obj = new $wnd.Ammo.btVector3(x, y, z);
 		return obj;
 	}-*/;

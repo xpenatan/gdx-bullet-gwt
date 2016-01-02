@@ -1,17 +1,32 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.btIDebugDraw;
+import com.badlogic.gdx.physics.bullet.linearmath.btQuaternion;
+import com.badlogic.gdx.physics.bullet.linearmath.btVector3;
 
 public class btCollisionWorld extends BulletBase
 {
+	
+	
 	protected btDispatcher m_dispatcher;
 	btIDebugDraw debugDrawer;
 	
 	protected btCollisionObjectArray objectArray = new btCollisionObjectArray();
-
+	
+	public btCollisionWorld()
+	{
+		if(Bullet.TMP_btVector3js_1 == null)
+			Bullet.TMP_btVector3js_1 = btVector3.createObj(0, 0, 0);
+		if(Bullet.TMP_btQuaternionjs_1 == null)
+			Bullet.TMP_btQuaternionjs_1 = btQuaternion.createObj(0, 0, 0, 1);
+			
+	}
+	
 	protected void addObject(btCollisionObject body)
 	{
 		objectArray.m_collisionObjects.put(body.jsObject, body);
@@ -19,8 +34,7 @@ public class btCollisionWorld extends BulletBase
 
 	protected boolean removeObject(btCollisionObject body)
 	{
-		boolean removeValue = objectArray.m_collisionObjects.removeValue(body, true);
-		return removeValue;
+		return objectArray.m_collisionObjects.removeValue(body, true);
 	}
 
 	public btCollisionObjectArray getCollisionObjectArray()
