@@ -1,24 +1,14 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
-import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class btTransform extends BulletBase
 {
-	static Matrix3 tmp3x3 = new Matrix3();
-	static btMatrix3x3 btTmp3x3 = new btMatrix3x3();
-	static Quaternion quat = new Quaternion();
-	static Vector3 pos = new Vector3();
-
-	float rx;
-	float ry;
-	float rz;
-	float rw;
-	
 	public btTransform(Matrix4 transform)
 	{
 		jsObject = createObj();
@@ -36,7 +26,7 @@ public class btTransform extends BulletBase
 			jsObject = createObj();
 	}
 
-	public native JavaScriptObject createObj() /*-{
+	public native static JavaScriptObject createObj() /*-{
 		var obj = new $wnd.Ammo.btTransform();
 		return obj;
 	}-*/;
@@ -49,13 +39,13 @@ public class btTransform extends BulletBase
 	 * this set matrix transform value to javascript transform
 	 */
 	public void setTransform(Matrix4 out)
-	{
+	{ // FIXME going to redo this method.
 		if(quatJS == null)
 			quatJS = newQuat();
 		out.getTranslation(tmp);
-		out.getRotation(quat);
+		out.getRotation(Bullet.TMP_Quaternion_1);
 		
-		setJSValue(quatJS, quat, tmp.x, tmp.y, tmp.z);
+		setJSValue(quatJS, Bullet.TMP_Quaternion_1, tmp.x, tmp.y, tmp.z);
 	}
 	
 	
@@ -64,9 +54,18 @@ public class btTransform extends BulletBase
 		return new $wnd.Ammo.btQuaternion(0,0,0,1);
 	}-*/;
 	
+	/**
+	 * this sync javascript transform with matrix transform. btTransformJS is the btTransform from ammo get call.
+	 * Dont change method name because its using in some js methods.
+	 */
+	public static native void setTransform(JavaScriptObject btTransformJS, Matrix4 out) /*-{
+	//TODO need implementation
 
+	}-*/;
+	
 	/**
 	 * this sync matrix transform with javascript transform. btTransformJS is the btTransform from ammo get call.
+	 * Dont change method name because its using in some js methods.
 	 */
 	public static native void getTransform(JavaScriptObject btTransformJS, Matrix4 out) /*-{
 	//FIXME need check if there is a better way to sync

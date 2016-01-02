@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.btIDebugDraw;
 import com.badlogic.gdx.physics.bullet.linearmath.btQuaternion;
+import com.badlogic.gdx.physics.bullet.linearmath.btTransform;
 import com.badlogic.gdx.physics.bullet.linearmath.btVector3;
 
 public class btCollisionWorld extends BulletBase
@@ -22,6 +23,10 @@ public class btCollisionWorld extends BulletBase
 	{
 		if(Bullet.TMP_btVector3js_1 == null)
 			Bullet.TMP_btVector3js_1 = btVector3.createObj(0, 0, 0);
+		if(Bullet.TMP_btVector3js_2 == null)
+			Bullet.TMP_btVector3js_2 = btVector3.createObj(0, 0, 0);
+		if(Bullet.TMP_btTransformjs_1 == null)
+			Bullet.TMP_btTransformjs_1 = btTransform.createObj();
 		if(Bullet.TMP_btQuaternionjs_1 == null)
 			Bullet.TMP_btQuaternionjs_1 = btQuaternion.createObj(0, 0, 0, 1);
 			
