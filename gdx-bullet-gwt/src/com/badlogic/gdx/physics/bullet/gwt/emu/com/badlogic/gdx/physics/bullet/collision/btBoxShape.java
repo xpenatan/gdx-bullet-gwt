@@ -15,8 +15,10 @@ public class btBoxShape extends btPolyhedralConvexShape
 		jsObject = createObj(boxHalfExtents.x, boxHalfExtents.y, boxHalfExtents.z);
 	}
 
-	private native JavaScriptObject createObj(float x, float y, float z) /*-{
-		var obj = new $wnd.Ammo.btBoxShape(new $wnd.Ammo.btVector3(x, y, z));
+	public static native JavaScriptObject createObj(float x, float y, float z) /*-{
+		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector.setValue(x,y,z);
+		var obj = new $wnd.Ammo.btBoxShape(tmpbtVector);
 		return obj;
 	}-*/;
 
