@@ -8,6 +8,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCollisionObject extends BulletBase
 {
+	public Object userData;
 	protected btCollisionShape collisionShape;
 
 	protected void refCollisionShape(btCollisionShape shape)
@@ -161,6 +162,16 @@ public class btCollisionObject extends BulletBase
 
 	public native void setUserPointer (int userPointer) /*-{
 		 //TODO what goes here? 
+	}-*/;
+	
+	public native boolean getUserValue () /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.getUserIndex();
+	}-*/;
+	
+	public native void setUserValue (int index) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setUserIndex(index);
 	}-*/;
 
 	

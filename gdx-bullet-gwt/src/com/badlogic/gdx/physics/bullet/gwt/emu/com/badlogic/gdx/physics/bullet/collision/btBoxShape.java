@@ -11,6 +11,7 @@ public class btBoxShape extends btPolyhedralConvexShape
 
 	public btBoxShape(Vector3 boxHalfExtents)
 	{
+		shapeType = BroadphaseNativeTypes.BOX_SHAPE_PROXYTYPE;
 		realhalfExtentsWithOutMargin.set(boxHalfExtents);
 		jsObject = createObj(boxHalfExtents.x, boxHalfExtents.y, boxHalfExtents.z);
 	}

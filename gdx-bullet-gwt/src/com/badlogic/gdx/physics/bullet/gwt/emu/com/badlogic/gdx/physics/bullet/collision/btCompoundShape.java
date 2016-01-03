@@ -13,12 +13,15 @@ public class btCompoundShape extends btCollisionShape
 		var shapeJS = shape.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var compountShapeJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		compountShapeJS.addChildShape(tmpbtTransform, shapeJS);
-		children.@com.badlogic.gdx.utils.Array::add(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionShape;)(shape);
+		var children = this.@com.badlogic.gdx.physics.bullet.collision.btCompoundShape::children;
+//		children.@com.badlogic.gdx.utils.Array::add(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionShape;)(shape);
+		children.@com.badlogic.gdx.utils.Array::add(Ljava/lang/Object;)(shape);
 	}-*/;
 
 	public native void removeChildShape(btCollisionShape shape)/*-{
 		var children = this.@com.badlogic.gdx.physics.bullet.collision.btCompoundShape::children;
-		var idx = children.@com.badlogic.gdx.utils.Array::indexOf(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionShape;Z)(shape, false);
+//		var idx = children.@com.badlogic.gdx.utils.Array::indexOf(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionShape;Z)(shape, false);
+		var idx = children.@com.badlogic.gdx.utils.Array::indexOf(Ljava/lang/Object;Z)(shape, false);
 		if (idx >= 0)
 		{
 			var compountShapeJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;

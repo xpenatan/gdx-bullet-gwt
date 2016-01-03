@@ -2,8 +2,10 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionWorld;
+import com.badlogic.gdx.physics.bullet.linearmath.btDefaultMotionState;
 import com.badlogic.gdx.physics.bullet.linearmath.btMotionState;
 
 public class btDynamicsWorld extends btCollisionWorld
@@ -76,15 +78,39 @@ public class btDynamicsWorld extends btCollisionWorld
 				
 				if(motionState != null)
 				{
-					if(motionState.first)
+					
+//					if(motionState instanceof btDefaultMotionState)
+//					{
+//						btDefaultMotionState defaultMotion = (btDefaultMotionState)motionState;
+//						
+//						
+//						if(motionState.first)
+//						{
+//							motionState.first = false;
+//							body.getWorldTransform(Bullet.TMP_Matrix4_1);
+//							motionState.getWorldTransform(Bullet.TMP_Matrix4_1);
+//							body.setWorldTransform(Bullet.TMP_Matrix4_1);
+//						}
+//						else
+//						{
+//							Matrix4 worldTransform = body.getWorldTransform();
+//							motionState.setWorldTransform(worldTransform);
+//						}
+//					}
+//					else
 					{
-						motionState.first = false;
-						motionState.getWorldTransform(body.getWorldTransform());
-					}
-					else
-					{
-						Matrix4 worldTransform = body.getWorldTransform();
-						motionState.setWorldTransform(worldTransform);
+						if(motionState.first)
+						{
+							motionState.first = false;
+							body.getWorldTransform(Bullet.TMP_Matrix4_1);
+							motionState.getWorldTransform(Bullet.TMP_Matrix4_1);
+							body.setWorldTransform(Bullet.TMP_Matrix4_1);
+						}
+						else
+						{
+							Matrix4 worldTransform = body.getWorldTransform();
+							motionState.setWorldTransform(worldTransform);
+						}
 					}
 				}
 			}

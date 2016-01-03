@@ -40,6 +40,21 @@ public class btCollisionWorld extends BulletBase
 	{
 		return objectArray.m_collisionObjects.removeValue(body, true);
 	}
+	
+	public native void addCollisionObject(btCollisionObject collisionObject) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
+		worldJS.addCollisionObject(bodyJS);
+	}-*/;
+	
+	public native void removeCollisionObject(btCollisionObject collisionObject) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::removeObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
+		
+//		worldJS.removeCollisionObject(bodyJS); //FIXME not in ammo.js yet.
+	}-*/;
 
 	public btCollisionObjectArray getCollisionObjectArray()
 	{
@@ -200,10 +215,9 @@ public class btCollisionWorld extends BulletBase
 
 				case BroadphaseNativeTypes.SPHERE_SHAPE_PROXYTYPE:
 				{
-					//	                const btSphereShape* sphereShape = static_cast<const btSphereShape*>(shape);
-					//	                btScalar radius = sphereShape->getMargin();//radius doesn't include the margin, so draw with margin
-					//
-					//	                getDebugDrawer()->drawSphere(radius, worldTransform, color);
+					btSphereShape sphereShape = (btSphereShape)shape;
+					float radius = sphereShape.getMargin();//radius doesn't include the margin, so draw with margin
+					debugDrawer.drawSphere(radius, worldTransform, color);
 					break;
 				}
 				case BroadphaseNativeTypes.MULTI_SPHERE_SHAPE_PROXYTYPE:

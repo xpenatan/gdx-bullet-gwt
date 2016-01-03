@@ -2,6 +2,7 @@ package com.badlogic.gdx.physics.bullet.dynamics;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObject;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionShape;
@@ -254,7 +255,11 @@ public class btRigidBody extends btCollisionObject
 		this.motionState = motionState;
 		//		if (this.motionState != null)
 		//			this.motionState.obtain();
-		motionState.first = true;
+		
+		motionState.first = false;
+		getWorldTransform(Bullet.TMP_Matrix4_1);
+		motionState.getWorldTransform(Bullet.TMP_Matrix4_1);
+		setWorldTransform(Bullet.TMP_Matrix4_1);
 	}
 
 	static public class btRigidBodyConstructionInfo extends BulletBase

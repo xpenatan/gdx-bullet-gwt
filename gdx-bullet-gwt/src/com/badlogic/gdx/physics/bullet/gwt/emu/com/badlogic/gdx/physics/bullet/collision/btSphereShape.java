@@ -6,6 +6,7 @@ public class btSphereShape extends btConvexInternalShape
 {
 	public btSphereShape(float radius)
 	{
+		shapeType = BroadphaseNativeTypes.SPHERE_SHAPE_PROXYTYPE;
 		jsObject = createObj(radius);
 	}
 	

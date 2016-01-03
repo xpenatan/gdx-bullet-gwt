@@ -33,7 +33,7 @@ public class btHeightfieldTerrainShape extends btConcaveShape
 		return ammoHeightFieldData;
 	}-*/;
 	
-	public native JavaScriptObject createAmmoHeightShape (int heightStickWidth, int heightStickLength, JavaScriptObject heightfieldData, float heightScale, float minHeight, float maxHeight, long upAxis, String PHY_ScalarType, boolean flipQuadEdges) /*-{ 
+	public native JavaScriptObject createAmmoHeightShape (int heightStickWidth, int heightStickLength, JavaScriptObject heightfieldData, float heightScale, float minHeight, float maxHeight, int upAxis, String PHY_ScalarType, boolean flipQuadEdges) /*-{ 
 		// Creates the heightfield physics shape
 		var heightFieldShape = new $wnd.Ammo.btHeightfieldTerrainShape(
 			terrainWidth,

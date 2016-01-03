@@ -4,6 +4,7 @@
 .DS_STORE
 
 .gradle/
+gdxBulletTest/
 build/
 bin/
 target/

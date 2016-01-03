@@ -5,6 +5,8 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 
 public class btCollisionShape extends BulletBase
 {
+	protected int shapeType = 0;
+	
 	public native void setLocalScaling(Vector3 scaling) /*-{
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var x = scaling.@com.badlogic.gdx.math.Vector3::x;
@@ -31,7 +33,7 @@ public class btCollisionShape extends BulletBase
 	}-*/;
 	
 	public int getShapeType() {
-		return 0;
+		return shapeType;
 	}
 	
 	public native float getMargin() /*-{
