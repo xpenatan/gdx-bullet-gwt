@@ -20,11 +20,6 @@ public class btBoxShape extends btPolyhedralConvexShape
 		return obj;
 	}-*/;
 
-	private native float getMargin() /*-{
-		var boxShape = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		return boxShape.getMargin();;
-	}-*/;
-
 	public Vector3 getHalfExtentsWithoutMargin()
 	{
 		halfExtentsWithOutMargin.set(realhalfExtentsWithOutMargin);

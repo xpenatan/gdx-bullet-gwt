@@ -5,6 +5,15 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 
 public class btCollisionShape extends BulletBase
 {
+	public native void setLocalScaling(Vector3 scaling) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var x = scaling.@com.badlogic.gdx.math.Vector3::x;
+		var y = scaling.@com.badlogic.gdx.math.Vector3::y;
+		var z = scaling.@com.badlogic.gdx.math.Vector3::z;
+		var vector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		vector.setValue(x,y,z);
+		collObject.setLocalScaling(margin);
+	}-*/;
 
 	public native void calculateLocalInertia(float mass, Vector3 inertia) /*-{
 		var shapeJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
@@ -13,17 +22,26 @@ public class btCollisionShape extends BulletBase
 		var y = inertia.@com.badlogic.gdx.math.Vector3::y;
 		var z = inertia.@com.badlogic.gdx.math.Vector3::z;
 		
-		var vector = new $wnd.Ammo.btVector3(x, y, z);
+		var vector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
 		shapeJS.calculateLocalInertia(mass, vector);
 		
 		inertia.@com.badlogic.gdx.math.Vector3::x = vector.x();
 		inertia.@com.badlogic.gdx.math.Vector3::y = vector.y();
 		inertia.@com.badlogic.gdx.math.Vector3::z = vector.z();
-		
-		$wnd.Ammo.destroy(vector);
 	}-*/;
 	
 	public int getShapeType() {
 		return 0;
 	}
+	
+	public native float getMargin() /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.getMargin();
+	}-*/;
+
+	public native void setMargin(float margin) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setMargin(margin);
+	}-*/;
+	
 }
