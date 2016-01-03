@@ -4,12 +4,10 @@ import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.BulletBase;
-import com.badlogic.gdx.physics.bullet.linearmath.btTransform;
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCollisionObject extends BulletBase
 {
-	btTransform btTransform = new btTransform(false);
 	protected btCollisionShape collisionShape;
 
 	protected void refCollisionShape(btCollisionShape shape)
@@ -21,8 +19,6 @@ public class btCollisionObject extends BulletBase
 		collisionShape = shape;
 		//		collisionShape.obtain();
 	}
-	
-	JavaScriptObject setWorldTran;
 	
 	public native void setAnisotropicFriction(Vector3 anisotropicFriction, int frictionMode) /*-{
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
@@ -125,18 +121,9 @@ public class btCollisionObject extends BulletBase
 		collObject.setCollisionFlags(flag);
 	}-*/;
 	
-	public void setWorldTransform(Matrix4 transform)
-	{
-		if(setWorldTran == null)
-			setWorldTran = btTransform.createObj();
-		
-		btTransform.jsObject = setWorldTran;
-		btTransform.setTransform(transform);
-		setWorldTransform(btTransform);
-	}
-
-	private native void setWorldTransform(btTransform btTransform) /*-{
-		var transformJS = btTransform.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+	public native void setWorldTransform(Matrix4 transform) /*-{
+		var transformJS = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btTransformjs_1;
+		@com.badlogic.gdx.physics.bullet.linearmath.btTransform::setTransform(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/badlogic/gdx/math/Matrix4;)(transformJS, transform);
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		collObject.setWorldTransform(transformJS);
 	}-*/;

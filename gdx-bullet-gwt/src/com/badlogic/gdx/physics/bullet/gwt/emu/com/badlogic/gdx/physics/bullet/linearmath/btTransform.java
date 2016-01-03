@@ -1,9 +1,6 @@
 package com.badlogic.gdx.physics.bullet.linearmath;
 
 import com.badlogic.gdx.math.Matrix4;
-import com.badlogic.gdx.math.Quaternion;
-import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -12,7 +9,7 @@ public class btTransform extends BulletBase
 	public btTransform(Matrix4 transform)
 	{
 		jsObject = createObj();
-		setTransform(transform);
+		setTransform(jsObject, transform);
 	}
 
 	public btTransform()
@@ -31,41 +28,33 @@ public class btTransform extends BulletBase
 		return obj;
 	}-*/;
 
-	Vector3 tmp = new Vector3();
-	
-	JavaScriptObject quatJS;
-	
 	/**
-	 * this set matrix transform value to javascript transform
-	 */
-	public void setTransform(Matrix4 out)
-	{ // FIXME going to redo this method.
-		if(quatJS == null)
-			quatJS = newQuat();
-		out.getTranslation(tmp);
-		out.getRotation(Bullet.TMP_Quaternion_1);
-		
-		setJSValue(quatJS, Bullet.TMP_Quaternion_1, tmp.x, tmp.y, tmp.z);
-	}
-	
-	
-	
-	private native JavaScriptObject newQuat() /*-{
-		return new $wnd.Ammo.btQuaternion(0,0,0,1);
-	}-*/;
-	
-	/**
-	 * this sync javascript transform with matrix transform. btTransformJS is the btTransform from ammo get call.
-	 * Dont change method name because its using in some js methods.
+	 * This sync (set) javascript transform with matrix transform. btTransformJS is the btTransform from ammo.
 	 */
 	public static native void setTransform(JavaScriptObject btTransformJS, Matrix4 out) /*-{
-	//TODO need implementation
-
+	//FIXME need check if there is a better way to sync
+		var origin = btTransformJS.getOrigin();
+		var tmpVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Vector3_1;
+		out.@com.badlogic.gdx.math.Matrix4::getTranslation(Lcom/badlogic/gdx/math/Vector3;)(tmpVector);
+		var x = tmpVector.@com.badlogic.gdx.math.Vector3::x;
+		var y = tmpVector.@com.badlogic.gdx.math.Vector3::y;
+		var z = tmpVector.@com.badlogic.gdx.math.Vector3::z;
+		origin.setValue(x,y,z);
+		
+		var tmpQuaternion = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Quaternion_1;
+		out.@com.badlogic.gdx.math.Matrix4::getRotation(Lcom/badlogic/gdx/math/Quaternion;)(tmpQuaternion);
+		var xx = tmpQuaternion.@com.badlogic.gdx.math.Quaternion::x;
+		var yy = tmpQuaternion.@com.badlogic.gdx.math.Quaternion::y;
+		var zz = tmpQuaternion.@com.badlogic.gdx.math.Quaternion::z;
+		var ww = tmpQuaternion.@com.badlogic.gdx.math.Quaternion::w;
+	
+		var tmpbtQuaternion = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btQuaternionjs_1;
+		tmpbtQuaternion.setValue(xx, yy, zz, ww);
+		btTransformJS.setRotation(tmpbtQuaternion);
 	}-*/;
 	
 	/**
-	 * this sync matrix transform with javascript transform. btTransformJS is the btTransform from ammo get call.
-	 * Dont change method name because its using in some js methods.
+	 * this sync (get) matrix transform with javascript transform. btTransformJS is the btTransform from ammo.
 	 */
 	public static native void getTransform(JavaScriptObject btTransformJS, Matrix4 out) /*-{
 	//FIXME need check if there is a better way to sync
@@ -101,26 +90,6 @@ public class btTransform extends BulletBase
 //**************************
 	}-*/;
 	
-//	transform.set(btT.getBasis()).setTranslation(btT.getOrigin());
-	
-	
-	private native void setJSValue(JavaScriptObject quatJS, Quaternion quat, float x, float y, float z) /*-{
-		var transformJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		var rotation = transformJS.getRotation();
-		var origin = transformJS.getOrigin();
-	
-		origin.setX(x);
-		origin.setY(y);
-		origin.setZ(z);
-		
-		var xx = quat.@com.badlogic.gdx.math.Quaternion::x;
-		var yy = quat.@com.badlogic.gdx.math.Quaternion::y;
-		var zz = quat.@com.badlogic.gdx.math.Quaternion::z;
-		var ww = quat.@com.badlogic.gdx.math.Quaternion::w;
-	
-		quatJS.setValue(xx, yy, zz, ww);
-		transformJS.setRotation(quatJS);
-	}-*/;
 	
 	private native JavaScriptObject getBasis() /*-{
 		var transformJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
