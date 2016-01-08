@@ -11,4 +11,9 @@ You will need to work with Gdx sources.
 
 # Instructions
 1 - GwtBullet.init() needs to be called before return ApplicationListener at getApplicationListener().  
-2 - Have to place bullet.gwt.xml file in gdx-bullet project at com.badlogic.gdx.physics.
+2 - Have to place bullet.gwt.xml file in gdx-bullet project at com.badlogic.gdx.physics.  
+3 - Have to include \<inherits name="com.badlogic.gdx.physics.box2d.box2d-gwt"/> in gwt.xml file.  
+4 - For gdx-tests-gwt to work you need to remove System.load and LinearMath.btGetVersion() from BaseBulletTest.java.
+
+# Gdx-test-demo
+https://xpenatan.github.io/gdx-bullet-gwt/
