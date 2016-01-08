@@ -20,6 +20,9 @@ public class Bullet
 		public static JavaScriptObject TMP_btMatrix3x3JS_1;
 		
 		public static Vector3 TMP_Vector3_1 = new Vector3();
+		public static Vector3 TMP_Vector3_2 = new Vector3();
+		public static Vector3 TMP_Vector3_3 = new Vector3();
+		public static Vector3 TMP_Vector3_4 = new Vector3();
 		public static Quaternion TMP_Quaternion_1 = new Quaternion();
 		public static Matrix4 TMP_Matrix4_1 = new Matrix4();
 		public static Matrix3 TMP_Matrix3_1 = new Matrix3();
