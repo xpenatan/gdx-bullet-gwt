@@ -42,34 +42,17 @@ public class btRigidBody extends btCollisionObject
 		return obj;
 	}-*/;
 
-
+	public void setMotionState(btMotionState motionState)
+	{
+		refMotionState(motionState);
+		setMotionStatee(motionState);
+	}
 	
-//	public native void setMotionState(btMotionState motionState) /*-{  FIXME Dont work. maybe with a fixed ammo.js this will proper implemented. 
-//		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::javaScriptObject;
-//		
-////		var motinState = new $wnd.Ammo.btDefaultMotionState(new $wnd.Ammo.btTransform());
-////		
-////		motinState.get_m_graphicsWorldTrans = function(btTransform) {
-////    		$wnd.alert("111");
-////  		};
-////		motinState.set_m_graphicsWorldTrans = function(btTransform) {
-////    		$wnd.alert("222");
-////  		};
-////  		
-////		rBody.setMotionState( motinState );
-//		
-//		rBody.setMotionState( 
-//		{
-//			get_m_graphicsWorldTrans: function(btTransform) { 
-//				$wnd.alert("111");
-//			},
-//			set_m_graphicsWorldTrans: function(btTransform) {
-//				$wnd.alert("222");
-//			}
-//		}
-//		);
-//		
-//	}-*/;
+	private native void setMotionStatee(btMotionState motionState) /*-{  
+		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var c = motionState.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		rBody.setMotionState(c);
+	}-*/;
 	
 
 	
@@ -216,11 +199,6 @@ public class btRigidBody extends btCollisionObject
 		return motionState;
 	}
 	
-	public void setMotionState(btMotionState motionState)
-	{
-		refMotionState(motionState);
-	}
-	
 	public native void setAngularFactor(Vector3 angularFactor) /*-{ 
 		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var x = angularFactor.@com.badlogic.gdx.math.Vector3::x;
@@ -255,11 +233,6 @@ public class btRigidBody extends btCollisionObject
 		this.motionState = motionState;
 		//		if (this.motionState != null)
 		//			this.motionState.obtain();
-		
-		motionState.first = false;
-		getWorldTransform(Bullet.TMP_Matrix4_1);
-		motionState.getWorldTransform(Bullet.TMP_Matrix4_1);
-		setWorldTransform(Bullet.TMP_Matrix4_1);
 	}
 
 	static public class btRigidBodyConstructionInfo extends BulletBase
@@ -285,6 +258,130 @@ public class btRigidBody extends btCollisionObject
 
 		private native JavaScriptObject createObj(float mass, JavaScriptObject motionState, JavaScriptObject collisionShape) /*-{
 			return new $wnd.Ammo.btRigidBodyConstructionInfo(mass, motionState, collisionShape);
+		}-*/;
+		
+		public btCollisionShape getCollisionShape() {
+	  		return collisionShape;
+	  	}
+		
+		public native void setLinearDamping(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_linearDamping = value;
+		}-*/;
+		
+		public native float getLinearDamping()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_linearDamping;
+		}-*/;
+		
+		public native void setAngularDamping(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_angularDamping = value;
+		}-*/;
+		
+		public native float getAngularDamping()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_angularDamping;
+		}-*/;
+		
+		public native void setFriction(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_friction = value;
+		}-*/;
+		
+		public native float getFriction()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_friction;
+		}-*/;
+		
+		public native void setRollingFriction(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_rollingFriction = value;
+		}-*/;
+		
+		public native float getRollingFriction()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_rollingFriction;
+		}-*/;
+		
+		public native void setRestitution(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_restitution = value;
+		}-*/;
+		
+		public native float getRestitution()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_restitution;
+		}-*/;
+		
+		public native void setLinearSleepingThreshold(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_linearSleepingThreshold = value;
+		}-*/;
+		
+		public native float getLinearSleepingThreshold()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_linearSleepingThreshold;
+		}-*/;
+		
+		public native void setAngularSleepingThreshold(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_angularSleepingThreshold = value;
+		}-*/;
+		
+		public native float getAngularSleepingThreshold()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_angularSleepingThreshold;
+		}-*/;
+		
+		public native void setAdditionalDamping(boolean value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_additionalDamping = value;
+		}-*/;
+		
+		public native boolean getAdditionalDamping()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_additionalDamping;
+		}-*/;
+		
+		public native void setAdditionalDampingFactor(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_additionalDampingFactor = value;
+		}-*/;
+		
+		public native float getAdditionalDampingFactor()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_additionalDampingFactor;
+		}-*/;
+		
+		public native void setAdditionalLinearDampingThresholdSqr(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_additionalLinearDampingThresholdSqr = value;
+		}-*/;
+		
+		public native float getAdditionalLinearDampingThresholdSqr()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_additionalLinearDampingThresholdSqr;
+		}-*/;
+		
+		public native void setAdditionalAngularDampingThresholdSqr(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_additionalAngularDampingThresholdSqr = value;
+		}-*/;
+		
+		public native float getAdditionalAngularDampingThresholdSqr()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_additionalAngularDampingThresholdSqr;
+		}-*/;
+		
+		public native void setAdditionalAngularDampingFactor(float value) /*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			constrInfo.m_additionalAngularDampingFactor = value;
+		}-*/;
+		
+		public native float getAdditionalAngularDampingFactor()/*-{ 
+			var constrInfo = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+			return constrInfo.m_additionalAngularDampingFactor;
 		}-*/;
 	}
 }

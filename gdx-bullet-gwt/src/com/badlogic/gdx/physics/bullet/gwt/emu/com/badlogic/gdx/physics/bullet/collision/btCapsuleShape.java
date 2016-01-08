@@ -6,7 +6,7 @@ public class btCapsuleShape extends btConvexInternalShape
 {
 	public btCapsuleShape()
 	{
-		
+		shapeType = BroadphaseNativeTypes.CAPSULE_SHAPE_PROXYTYPE;
 	}
 	public btCapsuleShape(float radius, float height)
 	{

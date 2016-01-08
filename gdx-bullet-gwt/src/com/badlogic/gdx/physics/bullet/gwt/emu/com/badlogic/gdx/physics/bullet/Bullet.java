@@ -14,8 +14,10 @@ public class Bullet
 	// Dont change names. Refactor dont work in JS. 
 		public static JavaScriptObject TMP_btVector3js_1;
 		public static JavaScriptObject TMP_btVector3js_2;
+		public static JavaScriptObject TMP_btVector3js_3;
 		public static JavaScriptObject TMP_btQuaternionjs_1;
 		public static JavaScriptObject TMP_btTransformjs_1;
+		public static JavaScriptObject TMP_btMatrix3x3JS_1;
 		
 		public static Vector3 TMP_Vector3_1 = new Vector3();
 		public static Quaternion TMP_Quaternion_1 = new Quaternion();

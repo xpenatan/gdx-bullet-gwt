@@ -6,7 +6,7 @@ public class btConeShape extends btConvexInternalShape
 {
 	public btConeShape()
 	{
-		
+		shapeType = BroadphaseNativeTypes.CONE_SHAPE_PROXYTYPE;
 	}
 	public btConeShape(float radius, float height)
 	{

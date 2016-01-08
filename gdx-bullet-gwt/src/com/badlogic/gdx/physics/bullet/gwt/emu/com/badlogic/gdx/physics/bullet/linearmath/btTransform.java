@@ -31,63 +31,55 @@ public class btTransform extends BulletBase
 	/**
 	 * This sync (set) javascript transform with matrix transform. btTransformJS is the btTransform from ammo.
 	 */
-	public static native void setTransform(JavaScriptObject btTransformJS, Matrix4 out) /*-{
-	//FIXME need check if there is a better way to sync
+	public static native void setTransform(JavaScriptObject btTransformJS, Matrix4 matrix4In) /*-{
 		var origin = btTransformJS.getOrigin();
-		var tmpVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Vector3_1;
-		out.@com.badlogic.gdx.math.Matrix4::getTranslation(Lcom/badlogic/gdx/math/Vector3;)(tmpVector);
-		var x = tmpVector.@com.badlogic.gdx.math.Vector3::x;
-		var y = tmpVector.@com.badlogic.gdx.math.Vector3::y;
-		var z = tmpVector.@com.badlogic.gdx.math.Vector3::z;
+		var matrix3x3JS = btTransformJS.getBasis();
+		var row0  = matrix3x3JS.getRow(0);
+		var row1  = matrix3x3JS.getRow(1);
+		var row2  = matrix3x3JS.getRow(2);
+		var x = matrix4In.@com.badlogic.gdx.math.Matrix4::val[12];
+		var y = matrix4In.@com.badlogic.gdx.math.Matrix4::val[13];
+		var z = matrix4In.@com.badlogic.gdx.math.Matrix4::val[14];
 		origin.setValue(x,y,z);
-		
-		var tmpQuaternion = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Quaternion_1;
-		out.@com.badlogic.gdx.math.Matrix4::getRotation(Lcom/badlogic/gdx/math/Quaternion;)(tmpQuaternion);
-		var xx = tmpQuaternion.@com.badlogic.gdx.math.Quaternion::x;
-		var yy = tmpQuaternion.@com.badlogic.gdx.math.Quaternion::y;
-		var zz = tmpQuaternion.@com.badlogic.gdx.math.Quaternion::z;
-		var ww = tmpQuaternion.@com.badlogic.gdx.math.Quaternion::w;
-	
-		var tmpbtQuaternion = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btQuaternionjs_1;
-		tmpbtQuaternion.setValue(xx, yy, zz, ww);
-		btTransformJS.setRotation(tmpbtQuaternion);
+		var x0 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[0];
+		var y0 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[4];
+		var z0 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[8];
+		var x1 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[1];
+		var y1 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[5];
+		var z1 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[9];
+		var x2 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[2];
+		var y2 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[6];
+		var z2 = matrix4In.@com.badlogic.gdx.math.Matrix4::val[10];
+		row0.setValue(x0,y0,z0);
+		row1.setValue(x1,y1,z1);
+		row2.setValue(x2,y2,z2);
 	}-*/;
 	
 	/**
 	 * this sync (get) matrix transform with javascript transform. btTransformJS is the btTransform from ammo.
 	 */
-	public static native void getTransform(JavaScriptObject btTransformJS, Matrix4 out) /*-{
-	//FIXME need check if there is a better way to sync
-		
-		var rotation = btTransformJS.getRotation();
+	public static native void getTransform(JavaScriptObject btTransformJS, Matrix4 matrix4Out) /*-{
+		var matrix3x3JS = btTransformJS.getBasis();
+		var row0  = matrix3x3JS.getRow(0);
+		var row1  = matrix3x3JS.getRow(1);
+		var row2  = matrix3x3JS.getRow(2);
 		var origin = btTransformJS.getOrigin();
-
-		var vector3 = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Vector3_1;
-		vector3.@com.badlogic.gdx.math.Vector3::x = origin.x();
-		vector3.@com.badlogic.gdx.math.Vector3::y = origin.y();
-		vector3.@com.badlogic.gdx.math.Vector3::z = origin.z();
-		
-		var quaternion = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Quaternion_1;
-		quaternion.@com.badlogic.gdx.math.Quaternion::x = rotation.x();
-		quaternion.@com.badlogic.gdx.math.Quaternion::y = rotation.y();
-		quaternion.@com.badlogic.gdx.math.Quaternion::z = rotation.z();
-		quaternion.@com.badlogic.gdx.math.Quaternion::w = rotation.w();
-		
-		out.@com.badlogic.gdx.math.Matrix4::idt()();
-		out.@com.badlogic.gdx.math.Matrix4::translate(Lcom/badlogic/gdx/math/Vector3;)(vector3);
-		out.@com.badlogic.gdx.math.Matrix4::rotate(Lcom/badlogic/gdx/math/Quaternion;)(quaternion);
-		
-		
-//***  NOT WORKING  Basis should be faster than using quat/rotate calculation but its not working.
-//		tmp3x3.idt();
-//		getJSValue(pos);
-//		
-//		JavaScriptObject basis = getBasis();
-//		btTmp3x3.getMatrixJS(basis, tmp3x3);
-//		
-//		out.idt();
-//		out.set(tmp3x3).setTranslation(pos);
-//**************************
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[0] = row0.x();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[1] = row1.x();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[2] = row2.x();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[3] = 0;
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[4] = row0.y();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[5] = row1.y();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[6] = row2.y();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[7] = 0;
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[8] = row0.z();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[9] = row1.z();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[10] = row2.z();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[11] = 0;
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[12] = origin.x();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[13] = origin.y();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[14] = origin.z();
+		matrix4Out.@com.badlogic.gdx.math.Matrix4::val[15] = 1.0;
 	}-*/;
 	
 	

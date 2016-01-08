@@ -22,21 +22,18 @@ public class btDiscreteDynamicsWorld extends btDynamicsWorld
 	public native int stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) /*-{
 		var world = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var val =  world.stepSimulation(timeStep, maxSubSteps, fixedTimeStep);
-		this.@com.badlogic.gdx.physics.bullet.dynamics.btDiscreteDynamicsWorld::loopMotionState()();
 		return val;
 	}-*/;
 
 	public native int stepSimulation(float timeStep, int maxSubSteps) /*-{
 		var world = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var val = world.stepSimulation(timeStep, maxSubSteps);
-		this.@com.badlogic.gdx.physics.bullet.dynamics.btDiscreteDynamicsWorld::loopMotionState()();
 		return val;
 	}-*/;
 
 	public native int stepSimulation(float timeStep) /*-{
 		var world = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var val = world.stepSimulation(timeStep);
-		this.@com.badlogic.gdx.physics.bullet.dynamics.btDiscreteDynamicsWorld::loopMotionState()();
 		return val;
 	}-*/;
 	

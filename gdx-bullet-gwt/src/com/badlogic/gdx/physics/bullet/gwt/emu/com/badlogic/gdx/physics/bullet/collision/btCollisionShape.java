@@ -5,7 +5,7 @@ import com.badlogic.gdx.physics.bullet.BulletBase;
 
 public class btCollisionShape extends BulletBase
 {
-	protected int shapeType = 0;
+	protected int shapeType = -1;
 	
 	public native void setLocalScaling(Vector3 scaling) /*-{
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;

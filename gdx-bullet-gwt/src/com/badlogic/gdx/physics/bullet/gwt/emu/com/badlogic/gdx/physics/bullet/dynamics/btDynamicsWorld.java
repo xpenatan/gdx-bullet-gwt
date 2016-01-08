@@ -64,57 +64,21 @@ public class btDynamicsWorld extends btCollisionWorld
 		worldJS.removeRigidBody(bodyJS);
 	}-*/;
 	
-	void loopMotionState()
-	{ //FIXME  dirty hack to loop all motionState because ammo.js motionState dont work. Called by btDiscreteDynamicWorld.
-		int size = objectArray.m_collisionObjects.size;
-		
-		for(int i = 0; i < size;i++)
-		{
-			btCollisionObject body = objectArray.m_collisionObjects.getValueAt(i);
-			
-			if(body instanceof btRigidBody)
-			{
-				btMotionState motionState = ((btRigidBody) body).getMotionState();
-				
-				if(motionState != null)
-				{
-					
-//					if(motionState instanceof btDefaultMotionState)
-//					{
-//						btDefaultMotionState defaultMotion = (btDefaultMotionState)motionState;
-//						
-//						
-//						if(motionState.first)
-//						{
-//							motionState.first = false;
-//							body.getWorldTransform(Bullet.TMP_Matrix4_1);
-//							motionState.getWorldTransform(Bullet.TMP_Matrix4_1);
-//							body.setWorldTransform(Bullet.TMP_Matrix4_1);
-//						}
-//						else
-//						{
-//							Matrix4 worldTransform = body.getWorldTransform();
-//							motionState.setWorldTransform(worldTransform);
-//						}
-//					}
-//					else
-					{
-						if(motionState.first)
-						{
-							motionState.first = false;
-							body.getWorldTransform(Bullet.TMP_Matrix4_1);
-							motionState.getWorldTransform(Bullet.TMP_Matrix4_1);
-							body.setWorldTransform(Bullet.TMP_Matrix4_1);
-						}
-						else
-						{
-							Matrix4 worldTransform = body.getWorldTransform();
-							motionState.setWorldTransform(worldTransform);
-						}
-					}
-				}
-			}
-			
-		}
-	}
+	public native void addConstraint(btTypedConstraint constraint, boolean disableCollisionsBetweenLinkedBodies) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var constraintJS = constraint.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		worldJS.addConstraint(constraintJS, disableCollisionsBetweenLinkedBodies);
+	}-*/;
+
+	public native void addConstraint(btTypedConstraint constraint) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var constraintJS = constraint.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		worldJS.addConstraint(constraintJS);
+	}-*/;
+
+	public native void removeConstraint(btTypedConstraint constraint) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var constraintJS = constraint.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+  		worldJS.removeConstraint(constraintJS);
+	}-*/;
 }

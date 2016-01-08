@@ -7,7 +7,7 @@ public class btCylinderShape extends btConvexInternalShape
 {
 	public btCylinderShape()
 	{
-		
+		shapeType = BroadphaseNativeTypes.CYLINDER_SHAPE_PROXYTYPE;
 	}
 	
 	public btCylinderShape(Vector3 halfExtents)
