@@ -3,9 +3,10 @@ package com.badlogic.gdx.physics.bullet.collision;
 import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.math.Vector3;
 import com.badlogic.gdx.utils.Array;
+import com.google.gwt.core.client.JavaScriptObject;
 
 public class btBvhTriangleMeshShape extends btTriangleMeshShape
-{ //FIXME needs implementation
+{ //FIXME needs to finish implementation and clean up.
 	private btStridingMeshInterface meshInterface = null;
 	
 	public <T extends MeshPart> btBvhTriangleMeshShape(final Array<T> meshParts)
@@ -15,7 +16,8 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape
 
 	public <T extends MeshPart> btBvhTriangleMeshShape(final Array<T> meshParts, boolean useQuantizedAabbCompression)
 	{
-//		this(1, btTriangleIndexVertexArray.obtain(meshParts), useQuantizedAabbCompression);
+		this(1, btTriangleIndexVertexArray.obtain(meshParts), useQuantizedAabbCompression);
+//		this(1, null, useQuantizedAabbCompression);
 	}
 
 	public <T extends MeshPart> btBvhTriangleMeshShape(final Array<T> meshParts, boolean useQuantizedAabbCompression, boolean buildBvh)
@@ -87,13 +89,36 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape
 
 	private btBvhTriangleMeshShape(boolean dummy, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, boolean buildBvh)
 	{
-//		this(CollisionJNI.new_btBvhTriangleMeshShape__SWIG_0(dummy, btStridingMeshInterface.getCPtr(meshInterface), meshInterface, useQuantizedAabbCompression, buildBvh), true);
+		jsObject = createObj(meshInterface, useQuantizedAabbCompression, buildBvh);
 	}
 
 	private btBvhTriangleMeshShape(boolean dummy, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression)
 	{
-//		this(CollisionJNI.new_btBvhTriangleMeshShape__SWIG_1(dummy, btStridingMeshInterface.getCPtr(meshInterface), meshInterface, useQuantizedAabbCompression), true);
+		jsObject = createObj(meshInterface, useQuantizedAabbCompression);
 	}
+	
+	private native JavaScriptObject createObj(btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression) /*-{
+		var meshInterface = meshInterface.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+//		var triMesh = new $wnd.Ammo.btTriangleMesh(true, true);
+		
+//		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+//		tmpbtVector.setValue(0,0,0);
+//		var tmpbtVector2 = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_2;
+//		tmpbtVector2.setValue(1,1,1);
+//		var tmpbtVector3 = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_3;
+//		tmpbtVector3.setValue(1,0,1);
+
+//		triMesh.addTriangle(tmpbtVector, tmpbtVector2, tmpbtVector3, true);
+
+		var obj = new $wnd.Ammo.btBvhTriangleMeshShape(meshInterface, true);
+		return obj;
+	}-*/;
+	
+	private native JavaScriptObject createObj(btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, boolean buildBvh) /*-{
+		var meshInterface = meshInterface.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var obj = new $wnd.Ammo.btBvhTriangleMeshShape(meshInterface, useQuantizedAabbCompression, buildBvh);
+		return obj;
+	}-*/;
 
 	private btBvhTriangleMeshShape(boolean dummy, btStridingMeshInterface meshInterface, boolean useQuantizedAabbCompression, Vector3 bvhAabbMin, Vector3 bvhAabbMax, boolean buildBvh)
 	{

@@ -26,4 +26,20 @@ public class BulletBase implements Disposable
 	{
 		return disposed;
 	}
+	
+	/** Obtains a reference to this object, call release to free the reference. */
+	public void obtain() {
+	}
+	
+	/** Release a previously obtained reference, causing the object to be disposed when this was the last reference. */
+	public void release() {
+	}
+	
+	/** @return Whether this instance is obtained using the {@link #obtain()} method. */
+	public boolean isObtained() {
+		return false;
+	}
+	
+	protected void construct() {
+	}
 }
