@@ -2,7 +2,6 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.graphics.g3d.model.MeshPart;
 import com.badlogic.gdx.graphics.g3d.model.NodePart;
-import com.badlogic.gdx.physics.bullet.dynamics.btRigidBody.btRigidBodyConstructionInfo;
 import com.badlogic.gdx.utils.Array;
 import com.google.gwt.core.client.JavaScriptObject;
 

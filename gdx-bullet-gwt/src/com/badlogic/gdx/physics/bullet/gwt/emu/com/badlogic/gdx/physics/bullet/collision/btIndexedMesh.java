@@ -3,7 +3,6 @@ package com.badlogic.gdx.physics.bullet.collision;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Mesh;
 import com.badlogic.gdx.graphics.VertexAttribute;
 import com.badlogic.gdx.graphics.VertexAttributes.Usage;
@@ -204,51 +203,26 @@ public class btIndexedMesh extends BulletBase
 			set(btTriangleMesh, tag, mesh.getVerticesBuffer(), mesh.getVertexSize(), mesh.getNumVertices(), posAttr.offset, mesh.getIndicesBuffer(), offset, count);
 	
 		int sizeInBytesOfEachVertex =  mesh.getVertexSize();
-		int vertexCount =  mesh.getNumVertices();
-		int positionOffsetInBytes =  posAttr.offset;
-		int indexCount =  count;
-		int indexOffset =  offset;
-		
+		int numberOf4Bytes = sizeInBytesOfEachVertex/4;
 		FloatBuffer verticesBuffer = mesh.getVerticesBuffer();
-		
-		
+		int remaining = verticesBuffer.remaining();
 		int i = 0;
-//		float[] array = verticesBuffer.array();
-		while(verticesBuffer.remaining() != 0)
+		while(i+(3*numberOf4Bytes) < remaining)
 		{
-			float x1 = verticesBuffer.get();
-			float y1 = verticesBuffer.get();
-			float z1 = verticesBuffer.get();
-			verticesBuffer.get();
-			verticesBuffer.get();
-			verticesBuffer.get();
-			
-			float x2 = verticesBuffer.get();
-			float y2 = verticesBuffer.get();
-			float z2 = verticesBuffer.get();
-			verticesBuffer.get();
-			verticesBuffer.get();
-			verticesBuffer.get();
-			float x3 = verticesBuffer.get();
-			float y3 = verticesBuffer.get();
-			float z3 = verticesBuffer.get();
-			verticesBuffer.get();
-			verticesBuffer.get();
-			verticesBuffer.get();
-			
-			
-			
-			
-			
+			float x1 = verticesBuffer.get(i);
+			float y1 = verticesBuffer.get(i+1);
+			float z1 = verticesBuffer.get(i+2);
+			i=i+numberOf4Bytes;
+			float x2 = verticesBuffer.get(i);
+			float y2 = verticesBuffer.get(i+1);
+			float z2 = verticesBuffer.get(i+2);
+			i=i+numberOf4Bytes;
+			float x3 = verticesBuffer.get(i);
+			float y3 = verticesBuffer.get(i+1);
+			float z3 = verticesBuffer.get(i+2);
+			i=i+numberOf4Bytes;
 			set(btTriangleMesh, x1, y1, z1, x2, y2, z2, x3, y3, z3);
-//			verticesBuffer.arrayOffset()
-			
-//			Gdx.app.log("Vertices", "X: " + array[i] + " Y: " + array[i+1] + " Z: " + array[i+2]);
-			i++;
 		}
-		verticesBuffer.position(0);
-	
-//		Gdx.app.log("Vertices", "Size: " + i );
 	}
 
 	/**

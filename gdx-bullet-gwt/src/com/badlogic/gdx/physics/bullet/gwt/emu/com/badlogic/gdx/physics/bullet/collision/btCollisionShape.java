@@ -14,7 +14,7 @@ public class btCollisionShape extends BulletBase
 		var z = scaling.@com.badlogic.gdx.math.Vector3::z;
 		var vector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
 		vector.setValue(x,y,z);
-		collObject.setLocalScaling(margin);
+		collObject.setLocalScaling(vector);
 	}-*/;
 
 	public native void calculateLocalInertia(float mass, Vector3 inertia) /*-{
