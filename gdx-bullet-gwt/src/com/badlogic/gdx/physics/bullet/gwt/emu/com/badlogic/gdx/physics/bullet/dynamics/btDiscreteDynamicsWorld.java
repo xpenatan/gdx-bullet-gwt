@@ -11,12 +11,16 @@ public class btDiscreteDynamicsWorld extends btDynamicsWorld
 	{
 		this.m_dispatcher = dispatcher;
 		m_dispatcher.manifold.m_collisionObjects = this.objectArray.m_collisionObjects; // pass the list to manifold so it can get java bodies.
-		jsObject = createObj(dispatcher.jsObject, pairCache.jsObject, constraintSolver.jsObject, collisionConfiguration.jsObject);
+		jsObject = createObj(dispatcher, pairCache, constraintSolver, collisionConfiguration);
 	}
 	
-	private native JavaScriptObject createObj(JavaScriptObject dispatcher, JavaScriptObject pairCache, JavaScriptObject solver, JavaScriptObject config) /*-{
-	  var obj = new $wnd.Ammo.btDiscreteDynamicsWorld(dispatcher, pairCache, solver, config);
-	  return obj;
+	private native JavaScriptObject createObj(btDispatcher dispatcher, btBroadphaseInterface pairCache, btConstraintSolver constraintSolver, btCollisionConfiguration collisionConfiguration) /*-{
+		var dispatcherJS = dispatcher.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+	  	var broadphasePairCacheJS = pairCache.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var constraintSolverJS = constraintSolver.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var collisionConfigurationJS = collisionConfiguration.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+	  	var obj = new $wnd.Ammo.btDiscreteDynamicsWorld(dispatcherJS, broadphasePairCacheJS, constraintSolverJS, collisionConfigurationJS);
+		return obj;
 	}-*/;
 	
 	public native int stepSimulation(float timeStep, int maxSubSteps, float fixedTimeStep) /*-{

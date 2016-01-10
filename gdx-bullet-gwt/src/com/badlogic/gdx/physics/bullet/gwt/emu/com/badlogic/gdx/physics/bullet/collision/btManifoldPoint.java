@@ -9,26 +9,30 @@ public class btManifoldPoint extends BulletBase
 {
 	btVector3 tmp = new btVector3(false);
 	
-	public void getPositionWorldOnB(Vector3 out)
-	{
-		tmp.jsObject = getPositionWorldOnB();
-		out.x = tmp.getX();
-		out.y = tmp.getY();
-		out.z = tmp.getZ();
-	}
-
-	private native JavaScriptObject getPositionWorldOnB() /*-{
+	public native void getPositionWorldOnA(Vector3 out)  /*-{
 		var manifoldPoint = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		return manifoldPoint.getPositionWorldOnB();
+		var vector3JS = manifoldPoint.getPositionWorldOnA();
+		out.@com.badlogic.gdx.math.Vector3::x = vector3JS.z();
+		out.@com.badlogic.gdx.math.Vector3::y = vector3JS.y();
+		out.@com.badlogic.gdx.math.Vector3::z = vector3JS.x();
+	}-*/;
+	
+	public native void getPositionWorldOnB(Vector3 out)  /*-{
+		var manifoldPoint = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var vector3JS = manifoldPoint.getPositionWorldOnB();
+		out.@com.badlogic.gdx.math.Vector3::x = vector3JS.z();
+		out.@com.badlogic.gdx.math.Vector3::y = vector3JS.y();
+		out.@com.badlogic.gdx.math.Vector3::z = vector3JS.x();
+	}-*/;
+	
+	public native void getNormalWorldOnB(Vector3 out)  /*-{
+		var manifoldPoint = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var vector3JS = manifoldPoint.get_m_normalWorldOnB();
+		out.@com.badlogic.gdx.math.Vector3::x = vector3JS.z();
+		out.@com.badlogic.gdx.math.Vector3::y = vector3JS.y();
+		out.@com.badlogic.gdx.math.Vector3::z = vector3JS.x();
 	}-*/;
 
-	public void getNormalWorldOnB(Vector3 out)
-	{
-		tmp.jsObject = getNormalWorldOnB();
-		out.x = tmp.getX();
-		out.y = tmp.getY();
-		out.z = tmp.getZ();
-	}
 	
 	private native JavaScriptObject getNormalWorldOnB() /*-{
 		var manifoldPoint = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
@@ -40,9 +44,8 @@ public class btManifoldPoint extends BulletBase
 		return manifoldPoint.getDistance();
 	}-*/;
 
-	public native int getLifeTime() /*-{  //TODO not in AMMO.JS
+	public native int getLifeTime() /*-{
 		var manifoldPoint = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-//		return manifoldPoint.getLifeTime();
-		return 0;
+		return manifoldPoint.getLifeTime();
 	}-*/;
 }

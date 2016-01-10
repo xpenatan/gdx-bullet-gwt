@@ -7,6 +7,7 @@ import com.badlogic.gdx.physics.bullet.linearmath.btMatrix3x3;
 import com.badlogic.gdx.physics.bullet.linearmath.btQuaternion;
 import com.badlogic.gdx.physics.bullet.linearmath.btTransform;
 import com.badlogic.gdx.physics.bullet.linearmath.btVector3;
+import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCollisionWorld extends BulletBase
 {
@@ -17,8 +18,7 @@ public class btCollisionWorld extends BulletBase
 	
 	protected btCollisionObjectArray objectArray = new btCollisionObjectArray();
 	
-	public btCollisionWorld()
-	{
+	public btCollisionWorld() {
 		if(Bullet.TMP_btVector3js_1 == null)
 			Bullet.TMP_btVector3js_1 = btVector3.createObj(0, 0, 0);
 		if(Bullet.TMP_btVector3js_2 == null)
@@ -34,13 +34,24 @@ public class btCollisionWorld extends BulletBase
 			
 	}
 	
-	protected void addObject(btCollisionObject body)
-	{
+	public btCollisionWorld(btDispatcher dispatcher, btBroadphaseInterface broadphasePairCache, btCollisionConfiguration collisionConfiguration) {
+		this();
+		jsObject = createObj(dispatcher, broadphasePairCache, collisionConfiguration);
+	}
+	
+	private native JavaScriptObject createObj(btDispatcher dispatcher, btBroadphaseInterface broadphasePairCache, btCollisionConfiguration collisionConfiguration) /*-{
+		var dispatcherJS = dispatcher.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+	  	var broadphasePairCacheJS = broadphasePairCache.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var collisionConfigurationJS = collisionConfiguration.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var obj = new $wnd.Ammo.btCollisionWorld(dispatcherJS, broadphasePairCacheJS, collisionConfigurationJS);
+		return obj;
+	}-*/;
+	
+	protected void addObject(btCollisionObject body) {
 		objectArray.m_collisionObjects.put(body.jsObject, body);
 	}
 
-	protected boolean removeObject(btCollisionObject body)
-	{
+	protected boolean removeObject(btCollisionObject body) {
 		return objectArray.m_collisionObjects.removeValue(body, true);
 	}
 	
@@ -58,8 +69,7 @@ public class btCollisionWorld extends BulletBase
 		worldJS.removeCollisionObject(bodyJS); 
 	}-*/;
 	
-	public btCollisionObjectArray getCollisionObjectArray()
-	{
+	public btCollisionObjectArray getCollisionObjectArray() {
 		return objectArray;
 	}
 	
@@ -70,12 +80,24 @@ public class btCollisionWorld extends BulletBase
 		worldJS.setDebugDrawer(debugJS);
 	}-*/;
 
-	public btDispatcher getDispatcher()
-	{
+	public btDispatcher getDispatcher() {
 		return m_dispatcher;
 	}
 	public native void debugDrawWorld() /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		worldJS.debugDrawWorld();
 	}-*/;
+	
+	public native float getAppliedImpulse() /*-{
+		
+		return 0;
+	}-*/;
+	
+	 public native void contactPairTest(btCollisionObject colObjA, btCollisionObject colObjB, ContactResultCallback resultCallback) /*-{
+		 var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		 var colObjAJS = colObjA.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		 var colObjBJS = colObjB.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		 var resultCallbackJS = resultCallback.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		 worldJS.contactPairTest(colObjAJS, colObjBJS, resultCallbackJS);
+	 }-*/;
 }

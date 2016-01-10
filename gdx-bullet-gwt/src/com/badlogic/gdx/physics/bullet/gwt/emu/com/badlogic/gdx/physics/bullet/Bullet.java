@@ -4,6 +4,8 @@ import com.badlogic.gdx.math.Matrix3;
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.math.Quaternion;
 import com.badlogic.gdx.math.Vector3;
+import com.badlogic.gdx.physics.bullet.collision.btCollisionObjectWrapper;
+import com.badlogic.gdx.physics.bullet.collision.btManifoldPoint;
 import com.badlogic.gdx.physics.bullet.gwt.GwtBullet;
 import com.google.gwt.core.client.JavaScriptObject;
 
@@ -26,6 +28,9 @@ public class Bullet
 		public static Quaternion TMP_Quaternion_1 = new Quaternion();
 		public static Matrix4 TMP_Matrix4_1 = new Matrix4();
 		public static Matrix3 TMP_Matrix3_1 = new Matrix3();
+		public static btCollisionObjectWrapper TMP_btCollisionObjectWrapper_1 = new btCollisionObjectWrapper();
+		public static btCollisionObjectWrapper TMP_btCollisionObjectWrapper_2 = new btCollisionObjectWrapper();
+		public static btManifoldPoint TMP_btManifoldPoint_1 = new btManifoldPoint();
 	//*****
 	
 	public static void init()
