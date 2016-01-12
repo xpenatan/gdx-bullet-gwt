@@ -12,7 +12,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCollisionDispatcher extends btDispatcher
 {
-
+	public btCollisionDispatcher()
+	{
+		
+	}
 	public btCollisionDispatcher(btCollisionConfiguration config) {
 		jsObject = createObj(config.jsObject);
 	}

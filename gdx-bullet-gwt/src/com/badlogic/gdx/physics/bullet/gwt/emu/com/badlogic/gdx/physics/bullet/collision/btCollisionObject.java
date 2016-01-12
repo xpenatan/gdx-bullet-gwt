@@ -194,7 +194,7 @@ public class btCollisionObject extends BulletBase
 		 //TODO what goes here? 
 	}-*/;
 	
-	public native boolean getUserValue () /*-{
+	public native int getUserValue () /*-{
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		return collObject.getUserIndex();
 	}-*/;
