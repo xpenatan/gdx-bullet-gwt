@@ -10,9 +10,22 @@ public class btCollisionObject extends BulletBase
 {
 	public Object userData;
 	protected btCollisionShape collisionShape;
+	
+	public btCollisionObject() {
+		jsObject = createMe();
+	}
 
-	protected void refCollisionShape(btCollisionShape shape)
-	{
+	public JavaScriptObject createMe() {
+		return createObj();
+	}
+	
+	private native JavaScriptObject createObj() /*-{
+		var obj = new $wnd.Ammo.btCollisionObject();
+		obj.javaObject = this;
+		return obj;
+	}-*/;
+	
+	protected void refCollisionShape(btCollisionShape shape) {
 		if (collisionShape == shape)
 			return;
 		//		if (collisionShape != null)
@@ -41,10 +54,16 @@ public class btCollisionObject extends BulletBase
 		collObject.setAnisotropicFriction(anisotropicFriction);
 	}-*/;
 	
-	public btCollisionShape getCollisionShape()
-	{
+	public btCollisionShape getCollisionShape() {
 		return collisionShape;
 	}
+	
+	public native void setCollisionShape(btCollisionShape collisionShape) /*-{
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::refCollisionShape(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionShape;)(collisionShape)
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var collShapeJS = collisionShape.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setCollisionShape (collShapeJS);
+	}-*/;
 	
 	public native void setContactProcessingThreshold(int newState) /*-{
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
@@ -81,6 +100,16 @@ public class btCollisionObject extends BulletBase
 		return collObject.isKinematicObject();
 	}-*/;
 	
+	public native boolean isStaticObject()/*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.isStaticObject();
+	}-*/;
+	
+	public native boolean isStaticOrKinematicObject()/*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.isStaticOrKinematicObject();
+	}-*/;
+	
 	public native void setRestitution(float rest)/*-{
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		collObject.setRestitution(rest);
@@ -101,14 +130,12 @@ public class btCollisionObject extends BulletBase
 		return collObject.getWorldTransform();
 	}-*/;
 
-	public Matrix4 getWorldTransform()
-	{
+	public Matrix4 getWorldTransform() {
 		com.badlogic.gdx.physics.bullet.linearmath.btTransform.getTransform(getWorldTransformm(), Bullet.TMP_Matrix4_1);
 		return Bullet.TMP_Matrix4_1;
 	}
 	
-	public void getWorldTransform(Matrix4 out)
-	{
+	public void getWorldTransform(Matrix4 out) {
 		com.badlogic.gdx.physics.bullet.linearmath.btTransform.getTransform(getWorldTransformm(), out);
 	}
 	
@@ -122,6 +149,16 @@ public class btCollisionObject extends BulletBase
 		collObject.setCollisionFlags(flag);
 	}-*/;
 	
+	public native float getDeactivationTime() /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return collObject.getDeactivationTime();
+	}-*/;
+	
+	public native void setDeactivationTime(float time) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setDeactivationTime(time);
+	}-*/;
+	
 	public native void setWorldTransform(Matrix4 transform) /*-{
 		var transformJS = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btTransformjs_1;
 		@com.badlogic.gdx.physics.bullet.linearmath.btTransform::setTransform(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/badlogic/gdx/math/Matrix4;)(transformJS, transform);
@@ -129,13 +166,6 @@ public class btCollisionObject extends BulletBase
 		collObject.setWorldTransform(transformJS);
 	}-*/;
 
-	public native void setCollisionShape(btCollisionShape collisionShape) /*-{
-		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::refCollisionShape(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionShape;)(collisionShape)
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		var collShapeJS = collisionShape.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		collObject.setCollisionShape (collShapeJS);
-	}-*/;
-	
 	public native void setCcdMotionThreshold(float ccdMotionThreshold) /*-{
 		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		collObject.setCcdMotionThreshold(ccdMotionThreshold);
@@ -175,8 +205,7 @@ public class btCollisionObject extends BulletBase
 	}-*/;
 
 	
-	public final static class CollisionFlags
-	{
+	public final static class CollisionFlags {
 		public final static int CF_STATIC_OBJECT = 1;
 		public final static int CF_KINEMATIC_OBJECT = 2;
 		public final static int CF_NO_CONTACT_RESPONSE = 4;
@@ -186,8 +215,7 @@ public class btCollisionObject extends BulletBase
 		public final static int CF_DISABLE_SPU_COLLISION_PROCESSING = 64;
 	}
 
-	public final static class CollisionObjectTypes
-	{
+	public final static class CollisionObjectTypes {
 		public final static int CO_COLLISION_OBJECT = 1;
 		public final static int CO_RIGID_BODY = 2;
 		public final static int CO_GHOST_OBJECT = 4;
@@ -197,8 +225,7 @@ public class btCollisionObject extends BulletBase
 		public final static int CO_FEATHERSTONE_LINK = 64;
 	}
 
-	public final static class AnisotropicFrictionFlags
-	{
+	public final static class AnisotropicFrictionFlags {
 		public final static int CF_ANISOTROPIC_FRICTION_DISABLED = 0;
 		public final static int CF_ANISOTROPIC_FRICTION = 1;
 		public final static int CF_ANISOTROPIC_ROLLING_FRICTION = 2;

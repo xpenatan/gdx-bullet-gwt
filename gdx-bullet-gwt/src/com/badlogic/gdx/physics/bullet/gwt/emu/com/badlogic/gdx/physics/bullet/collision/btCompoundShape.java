@@ -2,10 +2,39 @@ package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.math.Matrix4;
 import com.badlogic.gdx.utils.Array;
+import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCompoundShape extends btCollisionShape
 {
 	protected Array<btCollisionShape> children = new Array<btCollisionShape>();
+
+	public btCompoundShape() {
+		jsObject = createObj();
+	}
+	
+	public btCompoundShape(boolean enableDynamicAabbTree, int initialChildCapacity) {
+		jsObject = createObj(enableDynamicAabbTree, initialChildCapacity);
+	}
+
+	public btCompoundShape(boolean enableDynamicAabbTree) {
+		jsObject = createObj(enableDynamicAabbTree);
+	}
+	
+	private native JavaScriptObject createObj() /*-{
+		var obj = new $wnd.Ammo.btCompoundShape();
+		obj.javaObject = this;
+		return obj;
+	}-*/;
+	private native JavaScriptObject createObj(boolean enableDynamicAabbTree) /*-{
+		var obj = new $wnd.Ammo.btCompoundShape(enableDynamicAabbTree);
+		obj.javaObject = this;
+		return obj;
+	}-*/;
+	private native JavaScriptObject createObj(boolean enableDynamicAabbTree, int initialChildCapacity) /*-{
+		var obj = new $wnd.Ammo.btCompoundShape(enableDynamicAabbTree, initialChildCapacity);
+		obj.javaObject = this;
+		return obj;
+	}-*/;
 
 	public native void addChildShape(Matrix4 localTransform, btCollisionShape shape)/*-{
 		var tmpbtTransform = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btTransformjs_1;

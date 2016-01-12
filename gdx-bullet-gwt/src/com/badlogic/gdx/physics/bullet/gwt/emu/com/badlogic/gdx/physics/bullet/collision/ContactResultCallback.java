@@ -33,7 +33,7 @@ public class ContactResultCallback extends BulletBase
 	public native boolean needsCollision(btBroadphaseProxy proxy0)  /*-{
 		var resCallBackJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var proxy0JS = proxy0.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		return false; // TODO not implemented yet.
+		return resCallBackJS.needsCollision(proxy0JS);
 	}-*/;
 	
 	public float addSingleResult(btManifoldPoint cp, btCollisionObjectWrapper colObj0Wrap, int partId0, int index0, btCollisionObjectWrapper colObj1Wrap, int partId1, int index1) {

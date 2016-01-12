@@ -5,8 +5,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCylinderShapeX extends btCylinderShape
 {
-	public btCylinderShapeX(Vector3 halfExtents)
-	{
+	public btCylinderShapeX(Vector3 halfExtents) {
 		jsObject = createObj(halfExtents);
 	}
 	

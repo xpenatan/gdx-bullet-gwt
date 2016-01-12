@@ -7,8 +7,7 @@ public class btShapeHull extends BulletBase
 {
 	btConvexShape shape;
 	
-	public btShapeHull(btConvexShape shape) 
-	{
+	public btShapeHull(btConvexShape shape) {
 		this.shape = shape;
 		jsObject = createObj(shape);
 	}
@@ -20,8 +19,7 @@ public class btShapeHull extends BulletBase
 	}-*/;
 	
 	@Override
-	public void dispose()
-	{
+	public void dispose() {
 		super.dispose();
 		shape = null;
 	}

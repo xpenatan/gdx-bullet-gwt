@@ -13,8 +13,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 public class btCollisionDispatcher extends btDispatcher
 {
 
-	public btCollisionDispatcher(btCollisionConfiguration config)
-	{
+	public btCollisionDispatcher(btCollisionConfiguration config) {
 		jsObject = createObj(config.jsObject);
 	}
 
@@ -23,8 +22,7 @@ public class btCollisionDispatcher extends btDispatcher
 		return obj;
 	}-*/;
 
-	public btPersistentManifold getManifoldByIndexInternal(int index)
-	{
+	public btPersistentManifold getManifoldByIndexInternal(int index) {
 //		long cPtr = CollisionJNI.btCollisionDispatcher_getManifoldByIndexInternal__SWIG_0(swigCPtr, this, index);
 //		return (cPtr == 0) ? null : new btPersistentManifold(cPtr, false);
 		return super.getManifoldByIndexInternal(index);

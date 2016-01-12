@@ -10,7 +10,6 @@ public class btDiscreteDynamicsWorld extends btDynamicsWorld
 	public btDiscreteDynamicsWorld(btDispatcher dispatcher, btBroadphaseInterface pairCache, btConstraintSolver constraintSolver, btCollisionConfiguration collisionConfiguration)
 	{
 		this.m_dispatcher = dispatcher;
-		m_dispatcher.manifold.m_collisionObjects = this.objectArray.m_collisionObjects; // pass the list to manifold so it can get java bodies.
 		jsObject = createObj(dispatcher, pairCache, constraintSolver, collisionConfiguration);
 	}
 	
@@ -20,6 +19,7 @@ public class btDiscreteDynamicsWorld extends btDynamicsWorld
 		var constraintSolverJS = constraintSolver.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var collisionConfigurationJS = collisionConfiguration.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 	  	var obj = new $wnd.Ammo.btDiscreteDynamicsWorld(dispatcherJS, broadphasePairCacheJS, constraintSolverJS, collisionConfigurationJS);
+	  	obj.javaObject = this;
 		return obj;
 	}-*/;
 	

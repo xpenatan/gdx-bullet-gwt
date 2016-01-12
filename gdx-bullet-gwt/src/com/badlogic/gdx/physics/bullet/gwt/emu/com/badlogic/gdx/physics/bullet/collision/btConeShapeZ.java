@@ -4,8 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btConeShapeZ extends btConeShape
 {
-	public btConeShapeZ(float radius, float height)
-	{
+	public btConeShapeZ(float radius, float height) {
 		jsObject = createObj(radius, height);
 	}
 	

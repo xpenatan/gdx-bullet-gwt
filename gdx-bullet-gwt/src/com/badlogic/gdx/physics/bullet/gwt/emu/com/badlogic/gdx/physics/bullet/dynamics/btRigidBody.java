@@ -34,10 +34,16 @@ public class btRigidBody extends btCollisionObject
 		this(new btRigidBodyConstructionInfo(mass, motionState, collisionShape));
 	}
 	
-
+	@Override
+	public JavaScriptObject createMe()
+	{
+		return null; // Don't let create the default object.
+	}
+	
 	private native JavaScriptObject createObj(btRigidBodyConstructionInfo constructionInfo) /*-{
 		var rbInfo = constructionInfo.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var obj = new $wnd.Ammo.btRigidBody(rbInfo);
+		obj.javaObject = this;
 		return obj;
 	}-*/;
 
@@ -90,6 +96,11 @@ public class btRigidBody extends btCollisionObject
 		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
 		tmpbtVector.setValue(x,y,z);
 		rBody.setLinearFactor(tmpbtVector);
+	}-*/;
+	
+	public native void clearForces() /*-{
+		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		rBody.clearForces();
 	}-*/;
 	
 	public native void applyTorque(Vector3 torque) /*-{
@@ -173,6 +184,14 @@ public class btRigidBody extends btCollisionObject
 		return tmpVector3;
 	}-*/;
 	
+	public native Matrix4 getCenterOfMassTransform() /*-{ 
+		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var transformJS = rBody.getCenterOfMassTransform();
+		var tmpMatrix4 = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Matrix4_1;
+		@com.badlogic.gdx.physics.bullet.linearmath.btTransform::getTransform(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/badlogic/gdx/math/Matrix4;)(transformJS, tmpMatrix4);
+		return tmpMatrix4;
+	}-*/;
+	
 	public native void setLinearVelocity(Vector3 lin_vel) /*-{ 
 		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var x = lin_vel.@com.badlogic.gdx.math.Vector3::x;
@@ -208,20 +227,30 @@ public class btRigidBody extends btCollisionObject
 		rBody.setAngularFactor(tmpbtVector);
 	}-*/;
 	
-	public native void applyGravity()/*-{
-//		if (isStaticOrKinematicObject()) //FIXME  needs implementation
-//			return;
-		
+	public native void applyGravity() /*-{
 		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
-		tmpbtVector.setValue(0,0,0);
-		rBody.applyCentralForce(tmpbtVector);
+		rBody.applyGravity();
 	}-*/;
 
-	public void setGravity(Vector3 gravity) 
-	{ //FIXME ammo.js dont have this method
+	public native void setGravity(Vector3 gravity) /*-{
+		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var x = gravity.@com.badlogic.gdx.math.Vector3::x;
+		var y = gravity.@com.badlogic.gdx.math.Vector3::y;
+		var z = gravity.@com.badlogic.gdx.math.Vector3::z;
+		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector.setValue(x,y,z);
+		rBody.setGravity(tmpbtVector);
+	}-*/;
 	
-	}
+	public native Vector3 getGravity() /*-{
+		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var vector3 = @com.badlogic.gdx.physics.bullet.Bullet::TMP_Vector3_1;
+		var vector3JS = rBody.getGravity();
+		vector3.@com.badlogic.gdx.math.Vector3::x = vector3JS.x();
+		vector3.@com.badlogic.gdx.math.Vector3::y = vector3JS.y();
+		vector3.@com.badlogic.gdx.math.Vector3::z = vector3JS.z();
+		return vector3;
+	}-*/;
 	
 	protected void refMotionState(btMotionState motionState)
 	{

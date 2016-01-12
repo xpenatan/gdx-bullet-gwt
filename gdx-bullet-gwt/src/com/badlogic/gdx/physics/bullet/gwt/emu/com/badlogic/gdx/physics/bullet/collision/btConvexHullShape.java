@@ -5,18 +5,15 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btConvexHullShape extends btPolyhedralConvexAabbCachingShape
 {
-	public btConvexHullShape()
-	{
+	public btConvexHullShape() {
 		jsObject = createObj();
 	}
 
-	public btConvexHullShape(java.nio.FloatBuffer points, int numPoints, int stride)
-	{
+	public btConvexHullShape(java.nio.FloatBuffer points, int numPoints, int stride) {
 		jsObject = createObj(points, numPoints, stride);
 	}
 
-	public btConvexHullShape(btShapeHull hull)
-	{
+	public btConvexHullShape(btShapeHull hull) {
 		jsObject = createObj(hull);
 	}
 

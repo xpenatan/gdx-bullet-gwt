@@ -48,15 +48,15 @@ public class btDynamicsWorld extends btCollisionWorld
 	public native void addRigidBody(btRigidBody body) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
 		worldJS.addRigidBody(bodyJS);
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
 	}-*/;
 
 	public native void removeRigidBody(btRigidBody body) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::removeObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
 		worldJS.removeRigidBody(bodyJS);
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::removeObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
 	}-*/;
 	
 	public native void addConstraint(btTypedConstraint constraint, boolean disableCollisionsBetweenLinkedBodies) /*-{
@@ -75,5 +75,10 @@ public class btDynamicsWorld extends btCollisionWorld
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var constraintJS = constraint.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
   		worldJS.removeConstraint(constraintJS);
+	}-*/;
+	
+	public native void clearForces() /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		worldJS.clearForces();
 	}-*/;
 }

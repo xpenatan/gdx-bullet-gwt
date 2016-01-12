@@ -4,8 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btDbvtBroadphase extends btBroadphaseInterface
 {
-	public btDbvtBroadphase()
-	{
+	public btDbvtBroadphase() {
 		jsObject = createObj();
 	}
 	

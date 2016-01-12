@@ -4,12 +4,8 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btConeShape extends btConvexInternalShape
 {
-	public btConeShape()
-	{
-		shapeType = BroadphaseNativeTypes.CONE_SHAPE_PROXYTYPE;
-	}
-	public btConeShape(float radius, float height)
-	{
+	public btConeShape(){	}
+	public btConeShape(float radius, float height) {
 		jsObject = createObj(radius, height);
 	}
 	

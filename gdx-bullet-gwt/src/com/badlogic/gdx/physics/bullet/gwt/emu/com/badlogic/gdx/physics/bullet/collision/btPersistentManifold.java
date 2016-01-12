@@ -1,15 +1,11 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.physics.bullet.linearmath.btTypedObject;
-import com.badlogic.gdx.utils.ArrayMap;
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class btPersistentManifold extends btTypedObject
 {
 
-	public ArrayMap<JavaScriptObject, btCollisionObject> m_collisionObjects = new ArrayMap<JavaScriptObject, btCollisionObject>(); // FIXME, this is used in btPersistentManifold getBoldy 0 and 1
-	
-	
 	btManifoldPoint maniFoldPoint = new btManifoldPoint();
 
 	public native int getNumContacts()/*-{
@@ -28,25 +24,21 @@ public class btPersistentManifold extends btTypedObject
 		return maniFold.getContactPoint(index);
 	}-*/;
 
-	public btCollisionObject getBody0()
-	{
-		JavaScriptObject obj = getBody_0();
-		return m_collisionObjects.get(obj);
-	}
-	public btCollisionObject getBody1()
-	{
-		JavaScriptObject obj = getBody_1();
-		return m_collisionObjects.get(obj);
-	}
 	
-	public native JavaScriptObject getBody_0()/*-{
+	public native btCollisionObject getBody0()/*-{
 		var maniFold = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		return maniFold.getBody0();
+		var bodyJS = maniFold.getBody0();;
+		if(bodyJS != null)
+			return @com.badlogic.gdx.physics.bullet.Bullet::getJavaBody(I)(bodyJS.ptr);
+		return null
 	}-*/;
 
-	public native JavaScriptObject getBody_1()/*-{
+	public native btCollisionObject getBody1()/*-{
 		var maniFold = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		return maniFold.getBody1();
+		var bodyJS = maniFold.getBody1();
+		if(bodyJS != null)
+			return @com.badlogic.gdx.physics.bullet.Bullet::getJavaBody(I)(bodyJS.ptr);
+		return null
 	}-*/;
 
 }

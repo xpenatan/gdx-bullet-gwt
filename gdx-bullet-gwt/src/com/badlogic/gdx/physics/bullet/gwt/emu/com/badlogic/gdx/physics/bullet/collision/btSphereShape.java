@@ -4,9 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btSphereShape extends btConvexInternalShape
 {
-	public btSphereShape(float radius)
-	{
-		shapeType = BroadphaseNativeTypes.SPHERE_SHAPE_PROXYTYPE;
+	public btSphereShape(float radius) {
 		jsObject = createObj(radius);
 	}
 	

@@ -5,13 +5,9 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCylinderShape extends btConvexInternalShape
 {
-	public btCylinderShape()
-	{
-		shapeType = BroadphaseNativeTypes.CYLINDER_SHAPE_PROXYTYPE;
+	public btCylinderShape() {
 	}
-	
-	public btCylinderShape(Vector3 halfExtents)
-	{
+	public btCylinderShape(Vector3 halfExtents) {
 		jsObject = createObj(halfExtents);
 	}
 	

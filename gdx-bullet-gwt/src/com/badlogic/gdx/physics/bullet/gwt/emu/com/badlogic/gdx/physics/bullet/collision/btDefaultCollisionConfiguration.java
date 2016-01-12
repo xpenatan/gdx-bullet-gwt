@@ -12,8 +12,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btDefaultCollisionConfiguration extends btCollisionConfiguration
 {
-	public btDefaultCollisionConfiguration()
-	{
+	public btDefaultCollisionConfiguration() {
 		this.jsObject = createObj();
 	}
 	

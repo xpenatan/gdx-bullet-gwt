@@ -4,12 +4,7 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCapsuleShape extends btConvexInternalShape
 {
-	public btCapsuleShape()
-	{
-		shapeType = BroadphaseNativeTypes.CAPSULE_SHAPE_PROXYTYPE;
-	}
-	public btCapsuleShape(float radius, float height)
-	{
+	public btCapsuleShape(float radius, float height) {
 		jsObject = createObj(radius, height);
 	}
 	

@@ -9,9 +9,7 @@ public class btBoxShape extends btPolyhedralConvexShape
 	Vector3 halfExtentsWithOutMargin = new Vector3();
 	Vector3 halfExtentsWithMargin = new Vector3();
 
-	public btBoxShape(Vector3 boxHalfExtents)
-	{
-		shapeType = BroadphaseNativeTypes.BOX_SHAPE_PROXYTYPE;
+	public btBoxShape(Vector3 boxHalfExtents) {
 		realhalfExtentsWithOutMargin.set(boxHalfExtents);
 		jsObject = createObj(boxHalfExtents.x, boxHalfExtents.y, boxHalfExtents.z);
 	}
@@ -23,14 +21,12 @@ public class btBoxShape extends btPolyhedralConvexShape
 		return obj;
 	}-*/;
 
-	public Vector3 getHalfExtentsWithoutMargin()
-	{
+	public Vector3 getHalfExtentsWithoutMargin() {
 		halfExtentsWithOutMargin.set(realhalfExtentsWithOutMargin);
 		return halfExtentsWithOutMargin;
 	}
 
-	public Vector3 getHalfExtentsWithMargin()
-	{
+	public Vector3 getHalfExtentsWithMargin() {
 		halfExtentsWithMargin.set(realhalfExtentsWithOutMargin);
 		float margin = getMargin();
 		halfExtentsWithMargin.add(margin);
