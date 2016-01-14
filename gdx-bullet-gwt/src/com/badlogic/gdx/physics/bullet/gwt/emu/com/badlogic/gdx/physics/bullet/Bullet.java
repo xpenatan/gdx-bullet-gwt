@@ -8,6 +8,7 @@ import com.badlogic.gdx.physics.bullet.collision.btBroadphasePairArray;
 import com.badlogic.gdx.physics.bullet.collision.btCollisionObjectWrapper;
 import com.badlogic.gdx.physics.bullet.collision.btManifoldPoint;
 import com.badlogic.gdx.physics.bullet.collision.btOverlappingPairCache;
+import com.badlogic.gdx.physics.bullet.collision.btPersistentManifold;
 import com.badlogic.gdx.physics.bullet.dynamics.btConstraintSetting;
 import com.badlogic.gdx.physics.bullet.gwt.GwtBullet;
 import com.google.gwt.core.client.JavaScriptObject;
@@ -35,6 +36,7 @@ public class Bullet
 		public static btCollisionObjectWrapper TMP_btCollisionObjectWrapper_1 = new btCollisionObjectWrapper();
 		public static btCollisionObjectWrapper TMP_btCollisionObjectWrapper_2 = new btCollisionObjectWrapper();
 		public static btManifoldPoint TMP_btManifoldPoint_1 = new btManifoldPoint();
+		public static btPersistentManifold TMP_btPersistentManifold_1 = new btPersistentManifold();
 		public static btConstraintSetting TMP_btConstraintSetting_1 = new btConstraintSetting();
 		public static btOverlappingPairCache TMP_btOverlappingPairCache_1 = new btOverlappingPairCache();
 		public static btBroadphasePairArray TMP_btBroadphasePairArray_1 = new btBroadphasePairArray();

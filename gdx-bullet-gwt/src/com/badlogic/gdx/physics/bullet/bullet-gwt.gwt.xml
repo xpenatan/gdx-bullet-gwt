@@ -5,4 +5,7 @@
 	<source path="gwt"/>
 	<super-source path="gwt/emu" />
 	<public path='public' />
+	
+	<extend-configuration-property name="gdx.reflect.include" value="com.badlogic.gdx.physics.bullet.BulletBase" />
+	<extend-configuration-property name="gdx.reflect.include" value="com.badlogic.gdx.physics.bullet.collision.ContactListener" />
 </module>

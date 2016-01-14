@@ -10,19 +10,42 @@ public class btCollisionObject extends BulletBase
 {
 	public Object userData;
 	protected btCollisionShape collisionShape;
+	protected int userValue;
+	protected int contactCallbackFilter;
+	protected int contactCallbackFlag = 1;
+	protected GdxCollisionObjectBridge gdxBridge;
 	
 	public btCollisionObject() {
+		gdxBridge = new GdxCollisionObjectBridge();
 		jsObject = createMe();
 	}
 
 	public JavaScriptObject createMe() {
-		return createObj();
+		JavaScriptObject createObj = createObj();
+		internalSetGdxBridge(gdxBridge, createObj);
+		return createObj;
+	}
+	
+	@Override
+	public void dispose()
+	{
+		super.dispose();
+		if (gdxBridge != null)
+			gdxBridge.dispose();
+		gdxBridge = null;
+		collisionShape = null;
 	}
 	
 	private native JavaScriptObject createObj() /*-{
 		var obj = new $wnd.Ammo.btCollisionObject();
 		obj.javaObject = this;
 		return obj;
+	}-*/;
+	
+	
+	static protected native void internalSetGdxBridge(GdxCollisionObjectBridge gdxBridge, JavaScriptObject collObject) /*-{
+		var bridgeJS = gdxBridge.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setUserPointer(bridgeJS);
 	}-*/;
 	
 	protected void refCollisionShape(btCollisionShape shape) {
@@ -194,16 +217,29 @@ public class btCollisionObject extends BulletBase
 		 //TODO what goes here? 
 	}-*/;
 	
-	public native int getUserValue () /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		return collObject.getUserIndex();
-	}-*/;
+	public int getUserValue () {
+		return gdxBridge.getUserValue();
+	}
 	
-	public native void setUserValue (int index) /*-{
-		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		collObject.setUserIndex(index);
-	}-*/;
+	public void setUserValue (int value) {
+		gdxBridge.setUserValue(userValue = value);
+	}
+	
+	public int getContactCallbackFlag() {
+		return contactCallbackFlag;
+	}
+	
+	public void setContactCallbackFlag(int flag) {
+		gdxBridge.setContactCallbackFlag(contactCallbackFlag = flag);
+	}
 
+	public int getContactCallbackFilter() {
+		return contactCallbackFilter;
+	}
+	
+	public void setContactCallbackFilter(int filter) {
+		gdxBridge.setContactCallbackFilter(contactCallbackFilter = filter);
+	}
 	
 	public final static class CollisionFlags {
 		public final static int CF_STATIC_OBJECT = 1;

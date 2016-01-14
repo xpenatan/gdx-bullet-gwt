@@ -22,6 +22,7 @@ public class btRigidBody extends btCollisionObject
 		refCollisionShape(constructionInfo.collisionShape);
 		refMotionState(constructionInfo.motionState);
 		jsObject = createObj(constructionInfo);
+		internalSetGdxBridge(gdxBridge, jsObject);
 	}
 	
 	public btRigidBody(float mass, btMotionState motionState, btCollisionShape collisionShape, Vector3 localInertia)
