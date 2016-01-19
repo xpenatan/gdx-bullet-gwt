@@ -10,7 +10,13 @@ import com.badlogic.gdx.physics.bullet.collision.btManifoldPoint;
 import com.badlogic.gdx.physics.bullet.collision.btOverlappingPairCache;
 import com.badlogic.gdx.physics.bullet.collision.btPersistentManifold;
 import com.badlogic.gdx.physics.bullet.dynamics.btConstraintSetting;
+import com.badlogic.gdx.physics.bullet.dynamics.btWheelInfo;
+import com.badlogic.gdx.physics.bullet.dynamics.btWheelInfo.RaycastInfo;
 import com.badlogic.gdx.physics.bullet.gwt.GwtBullet;
+import com.badlogic.gdx.physics.bullet.linearmath.btMatrix3x3;
+import com.badlogic.gdx.physics.bullet.linearmath.btQuaternion;
+import com.badlogic.gdx.physics.bullet.linearmath.btTransform;
+import com.badlogic.gdx.physics.bullet.linearmath.btVector3;
 import com.google.gwt.core.client.JavaScriptObject;
 
 
@@ -21,6 +27,7 @@ public class Bullet
 		public static JavaScriptObject TMP_btVector3js_1;
 		public static JavaScriptObject TMP_btVector3js_2;
 		public static JavaScriptObject TMP_btVector3js_3;
+		public static JavaScriptObject TMP_btVector3js_4;
 		public static JavaScriptObject TMP_btQuaternionjs_1;
 		public static JavaScriptObject TMP_btTransformjs_1;
 		public static JavaScriptObject TMP_btTransformjs_2;
@@ -40,6 +47,9 @@ public class Bullet
 		public static btConstraintSetting TMP_btConstraintSetting_1 = new btConstraintSetting();
 		public static btOverlappingPairCache TMP_btOverlappingPairCache_1 = new btOverlappingPairCache();
 		public static btBroadphasePairArray TMP_btBroadphasePairArray_1 = new btBroadphasePairArray();
+		public static btTransform TMP_btTransform_1 = new btTransform(false);
+		public static btWheelInfo TMP_btWheelInfo_1 = new btWheelInfo();
+		public static btWheelInfo.RaycastInfo TMP_RaycastInfo_1 = new RaycastInfo();
 	//*****
 	
 	public static void init()
@@ -47,7 +57,25 @@ public class Bullet
 		GwtBullet.init();
 	}
 
-	
+	public static void initVariables()
+	{
+		if(Bullet.TMP_btVector3js_1 == null)
+			Bullet.TMP_btVector3js_1 = btVector3.createObj(0, 0, 0);
+		if(Bullet.TMP_btVector3js_2 == null)
+			Bullet.TMP_btVector3js_2 = btVector3.createObj(0, 0, 0);
+		if(Bullet.TMP_btVector3js_3 == null)
+			Bullet.TMP_btVector3js_3 = btVector3.createObj(0, 0, 0);
+		if(Bullet.TMP_btVector3js_4 == null)
+			Bullet.TMP_btVector3js_4 = btVector3.createObj(0, 0, 0);
+		if(Bullet.TMP_btTransformjs_1 == null)
+			Bullet.TMP_btTransformjs_1 = btTransform.createObj();
+		if(Bullet.TMP_btTransformjs_2 == null)
+			Bullet.TMP_btTransformjs_2 = btTransform.createObj();
+		if(Bullet.TMP_btQuaternionjs_1 == null)
+			Bullet.TMP_btQuaternionjs_1 = btQuaternion.createObj(0, 0, 0, 1);
+		if(Bullet.TMP_btMatrix3x3JS_1 == null)
+			Bullet.TMP_btMatrix3x3JS_1 = btMatrix3x3.createObj();
+	}
 	public static native void destroyJS(JavaScriptObject jsObject) /*-{
 		$wnd.Ammo.destroy(jsObject);
 	}-*/;

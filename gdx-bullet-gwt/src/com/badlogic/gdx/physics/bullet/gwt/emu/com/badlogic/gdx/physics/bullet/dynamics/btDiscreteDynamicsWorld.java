@@ -7,6 +7,10 @@ import com.google.gwt.core.client.JavaScriptObject;
 
 public class btDiscreteDynamicsWorld extends btDynamicsWorld
 {
+	public btDiscreteDynamicsWorld()
+	{
+		
+	}
 	public btDiscreteDynamicsWorld(btDispatcher dispatcher, btBroadphaseInterface pairCache, btConstraintSolver constraintSolver, btCollisionConfiguration collisionConfiguration)
 	{
 		this.m_dispatcher = dispatcher;

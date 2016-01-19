@@ -60,8 +60,6 @@ public class btRigidBody extends btCollisionObject
 		rBody.setMotionState(c);
 	}-*/;
 	
-
-	
 	public native void setCenterOfMassTransform(Matrix4 xform) /*-{ 
 		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var tmpbtTransform = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btTransformjs_1;

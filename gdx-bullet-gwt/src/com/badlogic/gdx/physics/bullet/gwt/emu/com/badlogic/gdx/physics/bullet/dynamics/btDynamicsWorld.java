@@ -81,4 +81,29 @@ public class btDynamicsWorld extends btCollisionWorld
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		worldJS.clearForces();
 	}-*/;
+	
+	
+	public native void addVehicle(btActionInterface vehicle) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var vehicleJS = vehicle.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		worldJS.addAction(vehicleJS);
+	}-*/;
+
+	public native void removeVehicle(btActionInterface vehicle) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var vehicleJS = vehicle.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		worldJS.removeAction(vehicleJS);
+	}-*/;
+	
+	public native void addAction(btActionInterface action) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var actionJS = action.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		worldJS.addAction(actionJS);
+	}-*/;
+	
+	public native void removeAction(btActionInterface action) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var actionJS = action.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		worldJS.removeAction(actionJS);
+	}-*/;
 }

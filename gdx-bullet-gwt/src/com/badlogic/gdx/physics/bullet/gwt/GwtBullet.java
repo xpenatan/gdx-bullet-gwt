@@ -1,5 +1,6 @@
 package com.badlogic.gdx.physics.bullet.gwt;
 
+import com.badlogic.gdx.physics.bullet.Bullet;
 import com.google.gwt.core.client.Callback;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.ScriptInjector;
@@ -29,6 +30,7 @@ public class GwtBullet
 			@Override
 			public void onSuccess(Void ok)
 			{
+				Bullet.initVariables();
 			}
 		}).setWindow(ScriptInjector.TOP_WINDOW).inject();
 	}

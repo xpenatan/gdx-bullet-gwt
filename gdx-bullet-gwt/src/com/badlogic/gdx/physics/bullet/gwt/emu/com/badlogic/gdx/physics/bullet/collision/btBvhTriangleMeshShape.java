@@ -131,4 +131,14 @@ public class btBvhTriangleMeshShape extends btTriangleMeshShape
 	}
 	
 	
+	public native void performRaycast(btTriangleCallback callback, Vector3 raySource, Vector3 rayTarget) /*-{ 
+		var meshShapeJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var callbackJS = callback.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var tmpbtVector1 = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
+		tmpbtVector1.setValue(raySource.@com.badlogic.gdx.math.Vector3::x,raySource.@com.badlogic.gdx.math.Vector3::y,raySource.@com.badlogic.gdx.math.Vector3::z);
+		var tmpbtVector2 = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_2;
+		tmpbtVector2.setValue(rayTarget.@com.badlogic.gdx.math.Vector3::x,rayTarget.@com.badlogic.gdx.math.Vector3::y,rayTarget.@com.badlogic.gdx.math.Vector3::z);
+		meshShapeJS.performRaycast(callbackJS, tmpbtVector1, tmpbtVector2);
+	}-*/;
+	
 }

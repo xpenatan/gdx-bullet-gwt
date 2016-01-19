@@ -1,13 +1,8 @@
 package com.badlogic.gdx.physics.bullet.collision;
 
 import com.badlogic.gdx.math.Vector3;
-import com.badlogic.gdx.physics.bullet.Bullet;
 import com.badlogic.gdx.physics.bullet.BulletBase;
 import com.badlogic.gdx.physics.bullet.linearmath.btIDebugDraw;
-import com.badlogic.gdx.physics.bullet.linearmath.btMatrix3x3;
-import com.badlogic.gdx.physics.bullet.linearmath.btQuaternion;
-import com.badlogic.gdx.physics.bullet.linearmath.btTransform;
-import com.badlogic.gdx.physics.bullet.linearmath.btVector3;
 import com.google.gwt.core.client.JavaScriptObject;
 
 public class btCollisionWorld extends BulletBase
@@ -20,20 +15,7 @@ public class btCollisionWorld extends BulletBase
 	protected btCollisionObjectArray objectArray = new btCollisionObjectArray(this);
 	
 	public btCollisionWorld() {
-		if(Bullet.TMP_btVector3js_1 == null)
-			Bullet.TMP_btVector3js_1 = btVector3.createObj(0, 0, 0);
-		if(Bullet.TMP_btVector3js_2 == null)
-			Bullet.TMP_btVector3js_2 = btVector3.createObj(0, 0, 0);
-		if(Bullet.TMP_btVector3js_3 == null)
-			Bullet.TMP_btVector3js_3 = btVector3.createObj(0, 0, 0);
-		if(Bullet.TMP_btTransformjs_1 == null)
-			Bullet.TMP_btTransformjs_1 = btTransform.createObj();
-		if(Bullet.TMP_btTransformjs_2 == null)
-			Bullet.TMP_btTransformjs_2 = btTransform.createObj();
-		if(Bullet.TMP_btQuaternionjs_1 == null)
-			Bullet.TMP_btQuaternionjs_1 = btQuaternion.createObj(0, 0, 0, 1);
-		if(Bullet.TMP_btMatrix3x3JS_1 == null)
-			Bullet.TMP_btMatrix3x3JS_1 = btMatrix3x3.createObj();
+	
 	}
 	
 	public btCollisionWorld(btDispatcher dispatcher, btBroadphaseInterface broadphasePairCache, btCollisionConfiguration collisionConfiguration) {
@@ -62,6 +44,13 @@ public class btCollisionWorld extends BulletBase
 		var bodyJS = collisionObject.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(collisionObject);
 		worldJS.addCollisionObject(bodyJS);
+	}-*/;
+	
+	public native void addCollisionObject(btCollisionObject collisionObject, short collisionFilterGroup, short collisionFilterMask) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var bodyJS = collisionObject.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(collisionObject);
+		worldJS.addCollisionObject(bodyJS, collisionFilterGroup, collisionFilterMask);
 	}-*/;
 	
 	public native void removeCollisionObject(btCollisionObject collisionObject) /*-{

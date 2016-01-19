@@ -47,6 +47,17 @@ public class btCollisionObject extends BulletBase
 		var bridgeJS = gdxBridge.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		collObject.setUserPointer(bridgeJS);
 	}-*/;
+	public native void internalSetGdxBridge(JavaScriptObject collObject) /*-{
+		var gdxBridge = this.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::gdxBridge;
+		var bridgeJS = gdxBridge.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setUserPointer(bridgeJS);
+	}-*/;
+	public native void internalSetGdxBridge() /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject
+		var gdxBridge = this.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::gdxBridge;
+		var bridgeJS = gdxBridge.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		collObject.setUserPointer(bridgeJS);
+	}-*/;
 	
 	protected void refCollisionShape(btCollisionShape shape) {
 		if (collisionShape == shape)
@@ -209,6 +220,13 @@ public class btCollisionObject extends BulletBase
 		collObject.setUserIndex(index);
 	}-*/;
 	
+	public native void setInterpolationWorldTransform (Matrix4 trans) /*-{
+		var collObject = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var tmpbtTransform = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btTransformjs_1;
+		@com.badlogic.gdx.physics.bullet.linearmath.btTransform::setTransform(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/badlogic/gdx/math/Matrix4;)(tmpbtTransform, trans);
+		collObject.setInterpolationWorldTransform(tmpbtTransform);
+	}-*/;
+	 
 	public native int getUserPointer () /*-{
 		return 0; //TODO what goes here? 
 	}-*/;
@@ -218,7 +236,7 @@ public class btCollisionObject extends BulletBase
 	}-*/;
 	
 	public int getUserValue () {
-		return gdxBridge.getUserValue();
+		return userValue;
 	}
 	
 	public void setUserValue (int value) {

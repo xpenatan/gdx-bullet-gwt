@@ -83,8 +83,13 @@ public class btTransform extends BulletBase
 	}-*/;
 	
 	
-	private native JavaScriptObject getBasis() /*-{
+	public native JavaScriptObject getBasis() /*-{
 		var transformJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		return transformJS.getBasis();
+	}-*/;
+	
+	public native void getOpenGLMatrix(float[] m) /*-{
+		var transformJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		transformJS.getOpenGLMatrix(m);
 	}-*/;
 }

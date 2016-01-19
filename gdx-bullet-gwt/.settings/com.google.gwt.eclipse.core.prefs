@@ -1,3 +1,4 @@
 eclipse.preferences.version=1
 entryPointModules=
 filesCopiedToWebInfLib=
+problemSeverities=com.google.gwt.eclipse.core.markers.GWTProblemType\#101\=1

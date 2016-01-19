@@ -10,10 +10,6 @@ public class ContactListener extends BulletBase
 		jsObject = createObj();
 	}
 	
-	public static boolean overridesMethod(com.badlogic.gdx.utils.reflect.Method methods, Class<?> clazz) {
-	    return clazz == methods.getDeclaringClass();
-	}
-
 	private native JavaScriptObject createObj() /*-{
 		var obj = new $wnd.Ammo.myContactListener2();
 		obj.javaObject = this;

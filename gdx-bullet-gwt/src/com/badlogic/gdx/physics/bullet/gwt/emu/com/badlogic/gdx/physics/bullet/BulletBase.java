@@ -42,4 +42,7 @@ public class BulletBase implements Disposable
 	
 	protected void construct() {
 	}
+	
+	public void takeOwnership() {
+	}
 }

@@ -44,10 +44,14 @@ public class btBroadphasePairArray extends BulletBase
 					if(manifold.getNumContacts() > 0) {
 						obj0 = manifold.getBody0();
 						obj1 = manifold.getBody1();
+						var javaObj0 = @com.badlogic.gdx.physics.bullet.Bullet::getJavaBody(I)(obj0.ptr);
+						var javaObj1 = @com.badlogic.gdx.physics.bullet.Bullet::getJavaBody(I)(obj1.ptr);
+						var value0 = javaObj0.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::getUserValue()();
+						var value1 = javaObj1.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::getUserValue()();
 						if (obj0.ptr == otherJS.ptr)
-							out[count++] = obj1.getUserIndex();
+							out[count++] = value1;
 						else if (obj1.ptr == other.ptr)
-							out[count++] = obj0.getUserIndex();
+							out[count++] = value0;
 						else continue;
 						if (count >= max)
 							return count;

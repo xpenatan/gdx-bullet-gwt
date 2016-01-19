@@ -26,6 +26,11 @@ public class btVector3 extends BulletBase
 		var obj = new $wnd.Ammo.btVector3(x, y, z);
 		return obj;
 	}-*/;
+	
+	public native void setValue(float x, float y, float z) /*-{ 
+		var vectorJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		vectorJS.setValue(x,y,z);
+	}-*/;
 
 	//	public float dot(Vector3 v)
 	//	{
