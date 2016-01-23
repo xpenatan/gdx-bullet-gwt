@@ -1,0 +1,166 @@
+buttons.png
+size: 512,256
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+run-up
+  rotate: false
+  xy: 0, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+run-down
+  rotate: false
+  xy: 0, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+walk-up
+  rotate: false
+  xy: 128, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+walk-down
+  rotate: false
+  xy: 128, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+crouch-up
+  rotate: false
+  xy: 256, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+crouch-down
+  rotate: false
+  xy: 256, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+crawl-up
+  rotate: false
+  xy: 384, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+crawl-down
+  rotate: false
+  xy: 384, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+play-up
+  rotate: false
+  xy: 512, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+play-down
+  rotate: false
+  xy: 512, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+pause-up
+  rotate: false
+  xy: 640, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+pause-down
+  rotate: false
+  xy: 640, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+slow-up
+  rotate: false
+  xy: 768, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+slow-down
+  rotate: false
+  xy: 768, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+throw-up
+  rotate: false
+  xy: 896, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+throw-down
+  rotate: false
+  xy: 896, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+kill-up
+  rotate: false
+  xy: 1024, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+kill-down
+  rotate: false
+  xy: 1024, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+slider-background
+  rotate: false
+  xy: 1152, 0
+  size: 128, 256
+  orig: 128, 256
+  offset: 0, 0
+  index: -1
+slider-knob-up
+  rotate: false
+  xy: 1280, 0
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+slider-knob-down
+  rotate: false
+  xy: 1280, 64
+  size: 128, 64
+  orig: 128, 64
+  offset: 0, 0
+  index: -1
+whistle-up
+  rotate: false
+  xy: 1408, 0
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
+whistle-down
+  rotate: false
+  xy: 1408, 128
+  size: 128, 128
+  orig: 128, 128
+  offset: 0, 0
+  index: -1
