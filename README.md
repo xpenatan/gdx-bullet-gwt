@@ -16,8 +16,8 @@ You will need to work with Gdx sources.
 4 - For gdx-tests-gwt to work you need to remove System.load from BaseBulletTest.java.
 
 # Demos
-* [XpeEngine](https://xpenatan.github.io/XpeEngine/)
-* [gdx-tests](http://xpenatan.github.io/gdx-bullet-gwt/gdx-tests/) (ImportTest and SoftMeshTest not included becuase it crash)
-* [GdxDemo3D](http://xpenatan.github.io/gdx-bullet-gwt/GdxDemo3D/) (Experimental, not done yet)
+* [XpeEngine](https://xpenatan.github.io/XpeEngine/) ([link](https://www.youtube.com/watch?v=TAwMsJMaEC0))
+* [gdx-tests](http://xpenatan.github.io/gdx-bullet-gwt/gdx-tests/) ([link](https://github.com/libgdx/libgdx)) (ImportTest and SoftMeshTest not included becuase it crash)
+* [GdxDemo3D](http://xpenatan.github.io/gdx-bullet-gwt/GdxDemo3D/) ([link](https://github.com/jsjolund/GdxDemo3D)) (Experimental, not done yet)
 
 
