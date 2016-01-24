@@ -10,9 +10,9 @@ public class btCollisionWorld extends BulletBase
 	
 	
 	protected btDispatcher m_dispatcher;
-	btIDebugDraw debugDrawer;
+	btIDebugDraw debugDrawer = new btIDebugDraw();
 	
-	protected btCollisionObjectArray objectArray = new btCollisionObjectArray(this);
+	protected btCollisionObjectArray objectArray = new btCollisionObjectArray();
 	
 	public btCollisionWorld() {
 	
@@ -31,44 +31,43 @@ public class btCollisionWorld extends BulletBase
 		return obj;
 	}-*/;
 	
-	protected void addObject(btCollisionObject body) {
-		objectArray.m_collisionObjects.put(body.jsObject, body);
-	}
-
-	protected boolean removeObject(btCollisionObject body) {
-		return objectArray.m_collisionObjects.removeValue(body, true);
-	}
-	
 	public native void addCollisionObject(btCollisionObject collisionObject) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = collisionObject.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(collisionObject);
 		worldJS.addCollisionObject(bodyJS);
 	}-*/;
 	
 	public native void addCollisionObject(btCollisionObject collisionObject, short collisionFilterGroup, short collisionFilterMask) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = collisionObject.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(collisionObject);
 		worldJS.addCollisionObject(bodyJS, collisionFilterGroup, collisionFilterMask);
 	}-*/;
 	
 	public native void removeCollisionObject(btCollisionObject collisionObject) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = collisionObject.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
-		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::removeObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(collisionObject);
 		worldJS.removeCollisionObject(bodyJS); 
 	}-*/;
 	
-	public btCollisionObjectArray getCollisionObjectArray() {
-		return objectArray;
-	}
+	public native btCollisionObjectArray getCollisionObjectArray() /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var array = this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::objectArray;
+		array.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject = worldJS.getCollisionObjectArray();
+		return array;
+	}-*/;
 	
 	public native void setDebugDrawer(btIDebugDraw debugDrawer) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::debugDrawer = debugDrawer;
 		var debugJS = debugDrawer.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		worldJS.setDebugDrawer(debugJS);
+	}-*/;
+	
+	public native btIDebugDraw getDebugDrawer() /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var debugDrawer = this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::debugDrawer;
+//		debugDrawer.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject = worldJS.getDebugDrawer();
+		return debugDrawer;
 	}-*/;
 
 	public btDispatcher getDispatcher() {

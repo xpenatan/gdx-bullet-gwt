@@ -27,7 +27,7 @@ public class btTriangleRaycastCallback extends btTriangleCallback {
 			tmpVector3.@com.badlogic.gdx.math.Vector3::x = hitNormalLocal.x();
 			tmpVector3.@com.badlogic.gdx.math.Vector3::y = hitNormalLocal.y();
 			tmpVector3.@com.badlogic.gdx.math.Vector3::z = hitNormalLocal.z();
-			self.@com.badlogic.gdx.physics.bullet.collision.btTriangleRaycastCallback::reportHit(Lcom/badlogic/gdx/math/Vector3;FII)(tmpVector3, hitFraction, partId, triangleIndex);
+			return self.@com.badlogic.gdx.physics.bullet.collision.btTriangleRaycastCallback::reportHit(Lcom/badlogic/gdx/math/Vector3;FII)(tmpVector3, hitFraction, partId, triangleIndex);
 		};
 		obj.javaObject = this;
 		return obj;

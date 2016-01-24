@@ -35,6 +35,12 @@ public class RayResultCallback extends BulletBase
 		return obj;
 	}-*/;
 	
+	public native float addSingleResult(LocalRayResult rayResult, boolean normalInWorldSpace) /*-{
+		var rayJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var localRayResultJS = LocalRayResult.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return rayJS.addSingleResult(localRayResultJS, normalInWorldSpace);
+	}-*/;
+
 	public native void setClosestHitFraction(float value) /*-{
 		var rayJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		rayJS.set_m_closestHitFraction(value);

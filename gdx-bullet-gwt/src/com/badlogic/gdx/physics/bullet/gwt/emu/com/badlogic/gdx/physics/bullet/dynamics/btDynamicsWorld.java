@@ -49,14 +49,18 @@ public class btDynamicsWorld extends btCollisionWorld
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		worldJS.addRigidBody(bodyJS);
-		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::addObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
+	}-*/;
+	
+	public native void addRigidBody(btRigidBody body, short group, short mask) /*-{
+		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		worldJS.addRigidBody(bodyJS, group, mask);
 	}-*/;
 
 	public native void removeRigidBody(btRigidBody body) /*-{
 		var worldJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var bodyJS = body.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		worldJS.removeRigidBody(bodyJS);
-		this.@com.badlogic.gdx.physics.bullet.collision.btCollisionWorld::removeObject(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;)(body);
 	}-*/;
 	
 	public native void addConstraint(btTypedConstraint constraint, boolean disableCollisionsBetweenLinkedBodies) /*-{

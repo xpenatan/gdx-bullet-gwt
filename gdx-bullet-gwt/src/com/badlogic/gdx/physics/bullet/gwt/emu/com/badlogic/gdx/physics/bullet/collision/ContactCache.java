@@ -29,6 +29,7 @@ public class ContactCache extends BulletBase
 			self.@com.badlogic.gdx.physics.bullet.collision.ContactCache::onContactEnded(Lcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;ZLcom/badlogic/gdx/physics/bullet/collision/btCollisionObject;Z)
 			(colObj0, match0, colObj1, match1);
 		}
+		obj.enable();
 		return obj;
 	}-*/;
 	
@@ -67,6 +68,15 @@ public class ContactCache extends BulletBase
 		return listener.isEnabled();
 	}-*/;
 
+	
+	@Override
+	public void dispose()
+	{
+		if(jsObject != null)
+			disable();
+		super.dispose();
+	}
+	
 	public void onContactStarted(btPersistentManifold manifold, boolean match0, boolean match1)
 	{
 	}

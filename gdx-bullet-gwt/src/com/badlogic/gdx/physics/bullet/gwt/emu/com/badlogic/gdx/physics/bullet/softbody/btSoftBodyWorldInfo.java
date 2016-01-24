@@ -31,9 +31,10 @@ public class btSoftBodyWorldInfo extends BulletBase
 		wInfoJS.set_m_dispatcher(dispatchJS);
 	}-*/;
 
-	public btSparseSdf3 getSparsesdf()
-	{
-		//return (cPtr == 0) ? null : new btSparseSdf3(cPtr, false);
-		return new btSparseSdf3();
-	}
+	public native btSparseSdf3 getSparsesdf() /*-{
+		var wInfoJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var sparse = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btSparseSdf3_1;
+		sparse.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject = wInfoJS;
+		return sparse;
+	}-*/;
 }

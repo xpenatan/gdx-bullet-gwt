@@ -56,7 +56,12 @@ public class btBulletWorldImporter extends btWorldImporter {
 		var dataPtr1 = $wnd.Ammo._malloc(len);
 		var dataHeap1 = new Uint8Array($wnd.Ammo.HEAPU8.buffer, dataPtr1, len);
 		dataHeap1.set(new Uint8Array(verticesArray.buffer));
-		importerJS.loadFileFromMemory(dataHeap1.byteOffset, len);
+		
+		var bulletFile = new $wnd.Ammo.btBulletFile(dataHeap1.byteOffset, len);
+		var flag = bulletFile.getFlags();
+		var boolea = (flag & 1) != 0;
+		bulletFile.parse(0);
+		//importerJS.loadFileFromMemory2(dataHeap1.byteOffset, len);
 		//importerJS.loadFileFromMemory(verticesArray, len);
 		return false;
 	}-*/;

@@ -295,6 +295,13 @@ public class ContactListener extends BulletBase
 		listener.enable();
 	}-*/;
 	
+	@Override
+	public void dispose()
+	{
+		if(jsObject != null)
+			disable();
+		super.dispose();
+	}
 	
 	public void setMethods(int onContactAdded, int onContactProcessed, int onContactDestroyed, int onContactStarted, int onContactEnded) {
 		int events = 0;
@@ -376,10 +383,10 @@ public class ContactListener extends BulletBase
 		var listener = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		listener.enable();
 	}-*/;
-
-	public void disable() {
-	}
-
+	public native void disable() /*-{
+		var listener = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		listener.disable();
+	}-*/;
 	public void enableOnAdded() {
 	}
 

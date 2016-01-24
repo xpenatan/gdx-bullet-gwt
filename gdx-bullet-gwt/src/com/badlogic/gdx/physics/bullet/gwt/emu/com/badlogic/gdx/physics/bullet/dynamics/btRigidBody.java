@@ -251,6 +251,13 @@ public class btRigidBody extends btCollisionObject
 		return vector3;
 	}-*/;
 	
+	public native void proceedToTransform(Matrix4 newTrans) /*-{
+		var rBody = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var tmpbtTransform = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btTransformjs_1;
+		@com.badlogic.gdx.physics.bullet.linearmath.btTransform::setTransform(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/badlogic/gdx/math/Matrix4;)(tmpbtTransform, newTrans);
+		rBody.proceedToTransform(tmpbtTransform);
+	}-*/;
+	
 	protected void refMotionState(btMotionState motionState)
 	{
 		if (this.motionState == motionState)

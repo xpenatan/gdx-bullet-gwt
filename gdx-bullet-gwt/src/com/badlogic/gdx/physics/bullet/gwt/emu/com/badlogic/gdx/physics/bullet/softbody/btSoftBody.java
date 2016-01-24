@@ -33,29 +33,33 @@ public class btSoftBody extends btCollisionObject
 //		data.set(result);
 		
 		
-		var nDataBytes1 = verticesArray.length * verticesArray.BYTES_PER_ELEMENT;
-		var nDataBytes2 = indicesArray.length * indicesArray.BYTES_PER_ELEMENT;
+//		var nDataBytes1 = verticesArray.length * verticesArray.BYTES_PER_ELEMENT;
+//		var nDataBytes2 = indicesArray.length * indicesArray.BYTES_PER_ELEMENT;
 		var nDataBytes3 = indexMapArray.length * indexMapArray.BYTES_PER_ELEMENT;
 		
-		var dataPtr1 = $wnd.Ammo._malloc(nDataBytes1);
-		var dataPtr2 = $wnd.Ammo._malloc(nDataBytes2);
-		var dataPtr3 = $wnd.Ammo._malloc(nDataBytes3);
-		var dataHeap1 = new Uint8Array($wnd.Ammo.HEAPU8.buffer, dataPtr1, nDataBytes1);
-		var dataHeap2 = new Uint8Array($wnd.Ammo.HEAPU8.buffer, dataPtr2, nDataBytes2);
-		var dataHeap3 = new Uint8Array($wnd.Ammo.HEAPU8.buffer, dataPtr3, nDataBytes3);
+//		var dataPtr1 = $wnd.Ammo._malloc(nDataBytes1);
+//		var dataHeap1 = new Uint8Array($wnd.Ammo.HEAPU8.buffer, dataPtr1, nDataBytes1);
+//		dataHeap1.set(new Uint8Array(verticesArray.buffer));
+//
+//		var dataPtr2 = $wnd.Ammo._malloc(nDataBytes2);
+//		var dataHeap2 = new Uint8Array($wnd.Ammo.HEAPU8.buffer, dataPtr2, nDataBytes2);
+//		dataHeap2.set(new Uint8Array(indicesArray.buffer));
+
+	//	var dataPtr3 = $wnd.Ammo._malloc(nDataBytes3);
+	//	var dataHeap3 = new Uint8Array($wnd.Ammo.HEAPU8.buffer, dataPtr3, nDataBytes3);
+		//dataHeap3.set(new Uint8Array(indexMapArray.buffer));
+//		var softBodyJS = $wnd.Ammo.myClassHelper.prototype.createbtSoftBody(worldInfoJS, dataHeap1.byteOffset, vertexSize, posOffset, normalOffset,  dataHeap2.byteOffset, indexOffset, numVertices, dataHeap3.byteOffset, indexMapOffset);
+		var softBodyJS = $wnd.Ammo.myClassHelper.prototype.createbtSoftBody(worldInfoJS, verticesArray, vertexSize, posOffset, normalOffset,  indicesArray, indexOffset, numVertices, indexMapArray, indexMapOffset);
 		
-		dataHeap1.set(new Uint8Array(verticesArray.buffer));
-		dataHeap2.set(new Uint8Array(indicesArray.buffer));
-		dataHeap3.set(new Uint8Array(indexMapArray.buffer));
+//		var result1 = new Float32Array(dataHeap1.buffer, dataHeap1.byteOffset, verticesArray.length);
+//		var result2 = new Int16Array(dataHeap2.buffer, dataHeap2.byteOffset, indicesArray.length);
+		//var result3 = new Int16Array(dataHeap3.buffer, dataHeap3.byteOffset, indexMapArray.length);
+//		verticesArray.set(result1);
+//		indicesArray.set(result2);
+		//indexMapArray.set(result3)
 		
-		var softBodyJS = $wnd.Ammo.myClassHelper.prototype.createbtSoftBody(worldInfoJS, dataHeap1.byteOffset, vertexSize, posOffset, normalOffset,  dataHeap2.byteOffset, indexOffset, numVertices, dataHeap3.byteOffset, indexMapOffset);
-		
-		var result1 = new Float32Array(dataHeap1.buffer, dataHeap1.byteOffset, verticesArray.length);
-		var result2 = new Int16Array(dataHeap2.buffer, dataHeap2.byteOffset, indicesArray.length);
-		var result3 = new Int16Array(dataHeap3.buffer, dataHeap3.byteOffset, indexMapArray.length);
-		verticesArray.set(result1);
-		indicesArray.set(result2);
-		indexMapArray.set(result3);
+		//$wnd.Ammo._free(dataPtr3.byteOffset);;
+		//$wnd.Ammo._free(dataHeap3.byteOffset);;
 		
 		//var softBodyJS = new $wnd.Ammo.btSoftBody(worldInfoJS);
 		
@@ -105,7 +109,7 @@ public class btSoftBody extends btCollisionObject
 //			}
 //		}
 
-		
+		softBodyJS.javaObject = this;
 		return softBodyJS;
 	}-*/;
 	
@@ -235,7 +239,7 @@ public class btSoftBody extends btCollisionObject
 		var softBodyJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var tmpbtVector = @com.badlogic.gdx.physics.bullet.Bullet::TMP_btVector3js_1;
 		tmpbtVector.setValue(scl.@com.badlogic.gdx.math.Vector3::x, scl.@com.badlogic.gdx.math.Vector3::y, scl.@com.badlogic.gdx.math.Vector3::z);
-		softBodyJS.translate(tmpbtVector);
+		softBodyJS.scale(tmpbtVector);
 	}-*/;
 	
 	public native void translate(Vector3 vec) /*-{

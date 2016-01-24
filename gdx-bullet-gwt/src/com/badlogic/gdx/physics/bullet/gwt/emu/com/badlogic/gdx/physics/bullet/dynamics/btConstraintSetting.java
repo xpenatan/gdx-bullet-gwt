@@ -7,7 +7,7 @@ public class btConstraintSetting extends BulletBase
 {
 	public btConstraintSetting()
 	{
-		jsObject = createObj();
+		//jsObject = createObj();
 	}
 	
 	private native JavaScriptObject createObj() /*-{

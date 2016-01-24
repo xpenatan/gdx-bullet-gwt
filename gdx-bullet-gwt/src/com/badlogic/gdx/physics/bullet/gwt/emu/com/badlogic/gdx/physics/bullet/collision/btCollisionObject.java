@@ -226,14 +226,16 @@ public class btCollisionObject extends BulletBase
 		@com.badlogic.gdx.physics.bullet.linearmath.btTransform::setTransform(Lcom/google/gwt/core/client/JavaScriptObject;Lcom/badlogic/gdx/math/Matrix4;)(tmpbtTransform, trans);
 		collObject.setInterpolationWorldTransform(tmpbtTransform);
 	}-*/;
-	 
-	public native int getUserPointer () /*-{
-		return 0; //TODO what goes here? 
-	}-*/;
 
-	public native void setUserPointer (int userPointer) /*-{
-		 //TODO what goes here? 
-	}-*/;
+	long pointer;
+	
+	public long getUserPointer () {
+		return pointer; 
+	}
+
+	public void setUserPointer (long userPointer) {
+		pointer = userPointer;
+	}
 	
 	public int getUserValue () {
 		return userValue;

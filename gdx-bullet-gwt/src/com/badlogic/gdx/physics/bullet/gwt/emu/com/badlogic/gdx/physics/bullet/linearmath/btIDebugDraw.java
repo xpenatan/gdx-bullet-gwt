@@ -8,7 +8,13 @@ public class btIDebugDraw extends BulletBase
 {
 	public btIDebugDraw()
 	{
-		jsObject = createObj();
+		this(true);
+	}
+	
+	public btIDebugDraw(boolean create)
+	{
+		if(create)
+			jsObject = createObj();
 	}
 	
 	private native JavaScriptObject createObj() /*-{

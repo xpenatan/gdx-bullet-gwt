@@ -26,10 +26,25 @@ public class ClosestRayResultCallback extends RayResultCallback
 		var z2 = rayToWorld.@com.badlogic.gdx.math.Vector3::z;
 		rayFromWorldJS.setValue(x1, y1, z1);
 		rayToWorldJS.setValue(x2, y2, z2);
-		var obj = new $wnd.Ammo.ClosestRayResultCallback(rayFromWorldJS, rayToWorldJS);
+		var obj = new $wnd.Ammo.jsClosestRayResultCallback(rayFromWorldJS, rayToWorldJS);
+		var self = this;
+		obj.addSingleResult = function(rayResult, normalInWorldSpace) {
+			rayResultJS = $wnd.Ammo.wrapPointer(rayResult, $wnd.Ammo.LocalRayResult);
+			var rayResult = @com.badlogic.gdx.physics.bullet.Bullet::TMP_LocalRayResult_1;
+			rayResult.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject = rayResultJS;
+			return self.@com.badlogic.gdx.physics.bullet.collision.ClosestRayResultCallback::addSingleResult(Lcom/badlogic/gdx/physics/bullet/collision/LocalRayResult;Z)
+			(rayResult, normalInWorldSpace);
+		};
 		return obj;
 	}-*/;
 
+	public native float addSingleResult(LocalRayResult rayResult, boolean normalInWorldSpace) /*-{
+		var rayJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		var localRayResultJS = rayResult.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+		return rayJS.addSingleResultSuper(localRayResultJS, normalInWorldSpace);
+	}-*/;
+
+	
 	public native void getRayFromWorld(Vector3 out) /*-{
 		var rayJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		out.@com.badlogic.gdx.math.Vector3::x = rayJS.get_m_rayFromWorld().x();

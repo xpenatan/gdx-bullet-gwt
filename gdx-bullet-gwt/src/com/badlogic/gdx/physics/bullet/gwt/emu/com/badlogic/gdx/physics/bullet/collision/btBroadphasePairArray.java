@@ -18,12 +18,8 @@ public class btBroadphasePairArray extends BulletBase
 		return obj;
 	}-*/;
 	
-	/** Fills the given array with user value set using {@link btCollisionObject#setUserValue(int)} of the collision objects
-	 * within this pair array colliding with the given collision object.
-	 * @param out The array to fill with the user values
-	 * @param other The collision object the pair must contain (which itself is excluded from the result)
-	 * @return The amount of user values set in the out array. */
 	public native int getCollisionObjectsValue(final int[] out, final btCollisionObject other) /*-{
+
 		var otherJS = other.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var myAlignedObjectArrayHelper = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
 		var overlappingPairCacheJS = this.@com.badlogic.gdx.physics.bullet.collision.btBroadphasePairArray::overlappingPairCacheJS;
@@ -61,5 +57,42 @@ public class btBroadphasePairArray extends BulletBase
 			}
 		}
 		return count;
+		
+//		var overlappingPairCacheJS = this.@com.badlogic.gdx.physics.bullet.BulletBase::jsObject;
+//		var overlappingPairCacheJS = overlappingPairCacheJS.getOverlappingPairArray();
+//		var array = this.@com.badlogic.gdx.physics.bullet.collision.btBroadphasePairArray::array;
+//		var max = out.length;
+//		var n = overlappingPairCacheJS.size();
+//		var count = 0;
+//		var obj0, obj1;
+//		for (var i = 0; i < n; i++) {
+//			var collisionPair = $wnd.Ammo.wrapPointer(overlappingPairCacheJS.at(i), $wnd.Ammo.btBroadphasePair);
+//			var algorithm = collisionPair.get_m_algorithm();
+//			if (algorithm) {
+//				array.resize(0);
+//				algorithm.getAllContactManifolds(array);
+//				var s = array.size();
+//				for (var j = 0; j < s; j++) {
+//					var manifold = $wnd.Ammo.wrapPointer(array.at(j), $wnd.Ammo.btPersistentManifold);
+//					if(manifold.getNumContacts() > 0) {
+//						obj0 = manifold.getBody0();
+//						obj1 = manifold.getBody1();
+//						var javaObj0 = @com.badlogic.gdx.physics.bullet.Bullet::getJavaBody(I)(obj0.ptr);
+//						var javaObj1 = @com.badlogic.gdx.physics.bullet.Bullet::getJavaBody(I)(obj1.ptr);
+//						var value0 = javaObj0.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::getUserValue()();
+//						var value1 = javaObj1.@com.badlogic.gdx.physics.bullet.collision.btCollisionObject::getUserValue()();
+//						if (obj0.ptr == otherJS.ptr)
+//							out[count++] = value1;
+//						else if (obj1.ptr == other.ptr)
+//							out[count++] = value0;
+//						else continue;
+//						if (count >= max)
+//							return count;
+//					}
+//					var t = 0;
+//				}
+//			}
+//		}
+//		return count;
 	}-*/;
 }
