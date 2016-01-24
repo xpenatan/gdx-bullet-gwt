@@ -1,0 +1,2 @@
+# Module com.badlogic.gdx.tests.gwt.GdxTestsGwt
+# RPC service class, partial path of RPC policy file
