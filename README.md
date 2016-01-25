@@ -18,6 +18,6 @@ You will need to work with Gdx sources.
 # Demos
 * [XpeEngine](https://xpenatan.github.io/XpeEngine/) ([link](https://www.youtube.com/watch?v=TAwMsJMaEC0))
 * [gdx-tests](http://xpenatan.github.io/gdx-bullet-gwt/gdx-tests/) ([link](https://github.com/libgdx/libgdx)) (ImportTest and SoftMeshTest not included becuase it crash)
-* [GdxDemo3D](http://xpenatan.github.io/gdx-bullet-gwt/GdxDemo3D/) ([link](https://github.com/jsjolund/GdxDemo3D)) (Experimental, not done yet)
+* [GdxDemo3D](http://xpenatan.github.io/gdx-bullet-gwt/GdxDemo3D/) ([link](https://github.com/jsjolund/GdxDemo3D)) (Experimental. FPS increase if you change house level view)
 
 
