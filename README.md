@@ -1,3 +1,5 @@
+Note: This was a experimental build so no more updates for this proj. A new bullet project for web is being created to work with [Dragome backend](https://github.com/xpenatan/dragome-backend). Its auto generated and controlled by the base c++ project so its easier to manage.
+
 # gdx-bullet-gwt
 Bullet extension for libgdx html5
 
@@ -6,8 +8,6 @@ This extension emulate java bullet extension to use ammo.js instead of c++ jni. 
 If you going to help try to keep js calls as low as possible because there is a weird error "Maximum call stack size exceeded" that can occur. 
 
 You will need to work with Gdx sources.
-
-**Ammo source have been changed to work with libgdx. Going to upload it soon.**
 
 # Instructions
 1 - GwtBullet.init() needs to be called before return ApplicationListener at getApplicationListener().  
